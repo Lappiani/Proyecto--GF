@@ -2,8 +2,6 @@
 title: "Proyecto Gestión Financiera"
 author: "Luca Appiani (Grupo 13)"
 format: pdf
-pdf-engine: lualatex
-pdf-engine-opt: -outdir=out
 date: 09/28/2023
 bibliography: biblio.bib
 lang: es
