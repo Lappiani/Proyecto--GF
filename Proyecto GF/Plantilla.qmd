@@ -197,10 +197,10 @@ Un detalle a considerar es que las opciones que se mencionaron se transan en la 
 
 ### Reporte grupal
 
-Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados $\mathbf{\mu}$ y la matriz de covarianza de los activos que componen el portafolio $\mathbf{\Sigma}$, se calcularon los pesos $\mathbf{w}$ de cada activo. El problema de optimización a maximizar fue el siguiente:
+Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados ${\mu}$ y la matriz de covarianza de los activos que componen el portafolio ${\Sigma}$, se calcularon los pesos $\mathbf{w}$ de cada activo. El problema de optimización a maximizar fue el siguiente:
 
 $$
-\max_{\mathbf{w}} \left\{\mathbf{\mu} - \delta \mathbf{w}^{\intercal}\mathbf{\Sigma}\mathbf{w} \right\}
+\max_{\mathbf{w}} \left\{{\mu} - \delta \mathbf{w}^{\intercal}{\Sigma}\mathbf{w} \right\}
 $$
 Sujeto a:
 \begin{align}
