@@ -17,6 +17,9 @@ warning: false
 
 {{< include Hitos/Hito2.qmd >}}
 
+<!--# Revisar el precio de ejercicio de las opciones que se agregaron, ya que cambia-->
+
+\newpage
 # Referencias {.unnumbered}
 
 ::: {#refs}

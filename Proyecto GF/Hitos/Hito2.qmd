@@ -1,6 +1,87 @@
-# Hito 2
+# Aplicación de modelos de valoración de opciones y caso aplicado (Hito 2)
 
-## Aplicación modelo \textit{Black and Scholes}
+## Ingesta de datos
+
+Antes de comenzar directamente con los modelos como tal, es importante mencionar que los datos necesarios para utilizar dichos modelos se obtuvieron de la librería de *python* de [@YahooFinance]. Esta permite el acceso a datos del mercado de una forma útil y simple, además de que ofrece datos recientes.
+
+Algunos de los parámetros importantes a obtener son:
+
+  * La tasa libre de riesgo.
+  
+  * El precio del ejercicio y tiempo para el vencimiento de la opción cuyo activo subyacente sea la acción del Banco de Chile.
+  
+  * La volatilidad de la acción del Banco de Chile.
+  
+Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada.
+
+```{python}
+#| echo: false
+import yfinance as yf
+
+# Se define el ticker de un bono de tesorería de 10 años USA.
+treasury_bond = '^TNX'  
+
+treasury_bond = yf.Ticker(treasury_bond)
+treasury_bond_data = treasury_bond.history(period="1y")
+
+# Se obtiene el rendimiento más reciente.
+rend = treasury_bond_data['Close'].iloc[-1]
+
+risk_free_rate = rend / 100
+
+print(f"Tasa libre de riesgo (Rendimiento bonos 10 años USA): {risk_free_rate:.2%}")
+
+```
+
+```{python}
+#| echo: false
+import yfinance as yf
+from datetime import datetime
+
+# Replace 'BCH' with the appropriate ticker symbol for Banco de Chile.
+ticker = 'BCH'
+
+# Initialize a Yahoo Finance object for the stock.
+stock = yf.Ticker(ticker)
+
+# Fetch the option chain.
+option_chain = stock.option_chain()
+
+# Get the expiration dates of the options.
+exp_dates = stock.options
+
+time_to_expiration_years = [(datetime.strptime(exp_date, '%Y-%m-%d') - datetime.now()).days / 365 for exp_date in exp_dates]
+
+strike_prices = option_chain.calls['strike']
+
+print("Precios del ejercicio:")
+print(strike_prices)
+
+print("Tiempo hasta la expiración (en años):")
+print(time_to_expiration_years)
+
+```
+
+```{python}
+#| echo: false
+
+import numpy as np
+import scipy.stats as si
+
+def volatilidad(ticker, periodo_t):
+    df = yf.download(ticker, period = '1y')
+
+    retornos_diarios = df['Adj Close'].pct_change()
+    # Se calcula la desviación estándar para cada periodo_t. Y luego, se obtiene el promedio anualizado por la cantidad de días.
+    sigma = retornos_diarios.rolling(periodo_t).std()
+    # Volatilidad anualizada
+    sigma = sigma.mean()*np.sqrt(periodo_t)
+    return sigma
+
+```
+
+
+## Aplicación modelo Black y Scholes
 
 Antes de comenzar con la valorización de la opción cuyo activo subyacente es la acción del Banco de Chile, se presentarán cuáles son los parámetros que este modelo necesita, y la fórmula respectiva. Los parámetros para el modelo son:
 \begin{itemize}
@@ -13,13 +94,39 @@ Antes de comenzar con la valorización de la opción cuyo activo subyacente es l
 Luego, la fórmula para el modelo continuo es la siguiente:
 \begin{equation}
 \label{eq:BS}
-C(S,t) = S\cdot \phi(d_1) - K\cdot \exp(-R\cdot T) \cdot \phi(d_{2})\;,
+C(S,t) = S\cdot \Phi(d_1) - K\cdot \exp(-R\cdot T) \cdot \Phi(d_{2})\;,
 \end{equation}
 donde,
 \begin{align*}
 d_1 &= \frac{\log\left(\frac{S}{K}\right) + \left(R + \frac{\sigma^2}{2}\right)\cdot t}{\sqrt{\sigma^2 \cdot t}}\;,\\
 d_2 &= d_1 - \sqrt{\sigma^2 \cdot t}\;.
 \end{align*}
+Esta formulación para valuar opciones tiene una serie de supuestos. Estos últimos son condiciones de mercado de carácter ``ideal" para acciones y la opción respectiva [@black1973pricing]. A continuación se presenta una lista con los supuestos, donde se pone más énfasis al segundo, debido a que este puede ser un tanto complejo de comprender.
+
+a) La tasa de interés de corto plazo es conocida y constate en el tiempo.
+
+b) El precio de la acción sigue un ``*ramdom walk*" en tiempo continuo con una tasa de variación proporcional al cuadrado del precio de la acción. Luego, la distribución de posibles precios de acciones al final de cualquier intervalo finito es *log-normal*. La tasa de variación de los retornos de la acción es constante.
+
+    * En cuanto al ``*random walk*", esto implica que los cambios en el precio de la acción son aleatorias y no pueden ser predecidas con información histórica de la misma.
+    
+    * Luego, en cuanto a la proporcionalidad, esto se refiere a que la variabilidad o volatilidad del precio de la acción es constante en el tiempo. Lo cual implica que grandes cambios en el precio son raros, y los cambios pequeños son más comúnes.
+    
+    * Después, en lo que respecta a la distribución, esto significa que el logaritmo de del precio de las acciones siguen una distribución normal.
+    
+    * Por último, el modelo asume que la tasa a la cual los retornos de la acción varían, se mantiene constante en el tiempo. Por ende, si bien el precio de la acción puede cambiar de forma inesperada, la tasa a la cual suceden estos cambios se mantiene estable.
+
+c) La acción no paga dividendos ni ningún otro tipo de distribuciones.
+
+d) La opción es ``Europea", es decir, solo puede ser ejercida en la fecha de vencimiento.
+
+e) No hay costos de transacción en las compras o ventas de la acción o la opción respectiva.
+
+f) Es posible pedir prestado cualquier fracción del precio de un activo para comprarlo o venderlo, a una tasa de interés de corto plazo.
+
+g) No hay penalizaciones asociadas a realizar una venta en corto. Un vendedor que no es dueño de un activo aceptará el precio del activo de un comprador, y llegará a un acuerdo con el mismo en una fecha futura, pagándole un monto equivalente al precio del activo en esa fecha.
+
+Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas [@black1973pricing].
+
 Entonces, teniendo los parámetros y la fórmula a utilizar, se puede realizar el siguiente código.
 ```{python}
 #| echo: fenced
@@ -73,3 +180,125 @@ print(f'El precio para una opción call es: {call_option_p}')
 
 ```
 De donde se obtiene el la valuación o precio de una opción de compra de la acción del Banco de Chile.
+
+## Modelo adicional para valoración de opciones
+
+Existe una gran variedad de modelos además del que se presenta en [@black1973pricing]. Ahora bien, estos suelen ser bastante complejos en cuanto a la formulación, por lo que se escogió una alternativa más simple en comparación a esto últimos. El modelo adicional que se presentará corresponde al uno que tiene un enfoque basado en el método de simulación de Monte Carlo [@boyle1977options].
+
+Este modelo se utiliza para la valuación de opciones ``Europeas", al igual que el modelo de Black y Scholes [@black1973pricing]. Para presentar la metodología y fórmulas asociadas al modelo, primero se mostrarán los parámetros necesarios.
+
+- $S_t=$ El precio actual de la acción en el tiempo $t$.
+
+- $r=$ La tasa libre de riesgo por trimestre compuesta continuamente\footnote{Esto significa que los intereses se calculan sobre el capital más el interés obtenido en el periodo anterior.}.
+
+- $\sigma^2=$ varianza trimestral de la acción subyacente, se asume constante.
+
+- $D_t =$ dividendo que se paga en el tiempo $t$; dividendos pagaderos trimestralmente.
+
+- $E=$ Precio del ejercicio de la opción.
+
+- $T=$ Fecha de vencimiento de la opción.
+
+Además, es importante mencionar que se asume que el tiempo está **medido en trimestres**. También, se asume que $S_t$ representa el precio de la acción justo después del dividendo trimestral $D_t$ haya sido pagado.
+
+En lo que respecta a la metodología, para comenzar la simulación se genera un valor para $S_{t+1}$. Si el valor es mayor a $D_{t+1}$ entonces $(S_{t+1}-D_{t+1})$ es usado como el valor inicial para el segundo periodo, y el procedimiento continua, hasta llegar a $S_{T}$. Si en algún momento $S_{t+m}\{m=1,2,\dots ,(T-t-1)\}$ es menor o igual al pago de dividendo correspondiente $D_{t+m}$ el proceso se detiene. En este caso una nueva simulación comienza nuevamente desde el tiempo $t$. Una serie de experimentos de simulación son llevados a cabo, y el valor esperado de $\max\{S_{T}-E,0\}$ es calculado. El valor es después descontado a una tasa libre de riesgo para calcular una estimación del valor de la opción $\hat{g}$. Luego se calcula la varianza de la estimación por medio de la siguiente ecuación.
+\begin{equation}
+\label{eq:sd}
+\hat{s}^{2} = \frac{1}{(n-1)}\sum^{n}_{i=1}\left(g(y_i) - \hat{g}\right)^2\;,
+\end{equation}
+donde,
+\begin{equation*}
+\hat{g} = \frac{1}{n}\sum^{n}_{i=1}g(y_i)\;,
+\end{equation*}
+con $g(y_i)$ una función arbitraria. Luego, los intervalos de confianza con un 95\% de confianza son calculados de la siguiente forma,
+\begin{equation*}
+\hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
+\end{equation*}
+Entonces, habiendo presentado la metodología, en conjunto con las expresiones necesarias, se muestra el código relacionado a continuación. Lo que se hizo primero fue programar una función que recibiera los parámetros necesarios, para luego entregar el resultado.
+
+```{python}
+#| echo: fenced
+#| code-overflow: wrap
+import numpy as np
+
+def monte_carlo_option_pricing_model(S, K, T, r, sigma, N, M, option_type='call', nivel_confianza=0.95):
+    """
+    S: Precio actual del activo.
+    K: Precio del ejercicio.
+    T: Tiempo para el vencimiento.
+    r: Tasa libre de riesgo.
+    sigma: Volatilidad del activo subyacente.
+    N: Cantidad de pasos en el tiempo.
+    M: Cantidad de simulaciones.
+    option_type: Tipo de la opción ('call' o 'put').
+    confidence_level: Nivel de confianza para el intervalo de confianza.
+    """
+    dt = T / N  # Paso tiempo
+    I = np.zeros(M)  # Se inicializan los precios para cada simulación
+
+    # Se simulan los M caminos del precio, para N pasos en el tiempo, cada uno.
+    for i in range(M):
+        S_t = S
+        for j in range(N):
+            S_t *= np.exp((r - 0.5 * sigma**2) * dt + sigma * np.sqrt(dt) * np.random.standard_normal())
+        
+        I[i] = S_t
+    
+    # Se calculan los "pagos" en el vencimiento.
+    if option_type == 'call':
+        pago = np.maximum(I - K, 0)
+    elif option_type == 'put':
+        pago = np.maximum(K - I, 0)
+
+    # Se descuentan los flujos para obtener el precio en t=0.
+    C = np.exp(-r * T) * np.sum(pago) / M
+
+    # Se calculan el precio promedio y el error estándar.
+    precio_promedio = np.mean(pago)
+    sd = np.std(pago, ddof=1) / np.sqrt(M)
+
+    # Se calcula el intervalo de confianza.
+    z = np.abs(np.percentile(np.random.normal(0, 1, M), (1 - nivel_confianza) * 100 / 2))
+    lower_bound = precio_promedio - z * sd
+    upper_bound = precio_promedio + z * sd
+
+    return C, (lower_bound, upper_bound)
+
+
+```
+
+Luego, para calcular el precio de la opción, se aplica la función con los parámetros respectivos. Los resultados obtenidos fueron los siguientes.
+
+| Valores                    |Resultados    |
+|:---------------------------|--------------|
+|Promedio                    |0,16          |
+|Intervalo de confianza (90%)|(0,067; 0,138)|
+:Resultados valoración por el enfoque Monte Carlo.
+
+## Análisis Comparativo
+
+En la siguiente sección se llevará a cabo un análisis de ambos modelos presentados. Primero se contrastan los resultados obtenidos por cada modelo. Los resultados que se obtuvieron fueron los que se puede observar en la siguiente tabla.
+
+### Resultados
+
+|Método         | Resultado    |
+|:--------------|--------------|
+|Black y Scholes|0,136         |
+|Monte Carlo    |(0,067; 0,138)|
+:Análisis comparativo.
+
+Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de [@black1973pricing] se encuentra dentro del intervalo de confianza resultante del método [@boyle1977options].
+
+### Características
+
+Ahora se revisarán diferentes características de los modelos en los que difieren estos últimos. Primero, el modelo de Black y Scholes entrega una solución analítica para la valoración de opciones. Tiene una ecuación que calcula directamente el precio de la opción. El modelo se construye en base a múltiples supuestos, dentro de los cuales se encuentran volatilidad constante y una tasa libre de riesgo. Por otro lado, el enfoque de Monte Carlo es un método numérico. Tal como se mencionó, utiliza el muestreo aleatorio para estimar los precio de opciones. Este método no provee una formula directa, utiliza múltiples simulaciones para estimar el precio de una opción.
+
+Segundo, el modelo de Black y Scholes hace supuestos que simplifican el modelo, dentro de los cuales están volatilidad constante, una tasa libre de riesgo y una distribución de los retornos *Log-normal*. Estas últimas no se cumplen siempre en algunos escenarios. El enfoque de Monte Carlo se puede acomodar a supuestos más realísticos y complejos. Un ejemplo de esto último puede ser niveles de volatilidad que varían o tasas de interés, lo cual hace que el modelo se adapte a una mayor variedad de situaciones.
+
+Tercero, debido a la mayor capacidad de adaptación del enfoque de Monte Carlo ya mencionado, esto lo hace más preciso. No así el modelo de Black y Scholes, ya que como se mencionó, depende de múltiples supuestos.
+
+Finalmente, en cuanto al costo computacional, si la cantidad de simulaciones es muy grande, el enfoque de Monte Carlo puede llegar a ser costoso computacionalmente. Por otro lado, el modelo de Black y Scholes, como es una ecuación, provee resultados más rápido ya que no requiere realizar múltiples repeticiones.
+
+
+
+<!--# El valor tengo que presentarlo en forma de intervalo de confianza, ya que es una simluación.-->
