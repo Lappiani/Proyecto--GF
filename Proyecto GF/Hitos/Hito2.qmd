@@ -12,73 +12,16 @@ Algunos de los parámetros importantes a obtener son:
   
   * La volatilidad de la acción del Banco de Chile.
   
-Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada.
+Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada. En lo que respecta a los valores de estos tres parámetros, se utilizaron los que se pueden ver en la siguiente tabla.
 
-```{python}
-#| echo: false
-import yfinance as yf
+|Parámetro                           | Valor |
+|:-----------------------------------|-------|
+|Tasa libre de riesgo                |4,92%  |
+|Precio del ejercicio                |20     |
+|Tiempo para el vencimiento (en años)|0,49   |
+:Valores utilizados para los modelos de valoración.
 
-# Se define el ticker de un bono de tesorería de 10 años USA.
-treasury_bond = '^TNX'  
-
-treasury_bond = yf.Ticker(treasury_bond)
-treasury_bond_data = treasury_bond.history(period="1y")
-
-# Se obtiene el rendimiento más reciente.
-rend = treasury_bond_data['Close'].iloc[-1]
-
-risk_free_rate = rend / 100
-
-print(f"Tasa libre de riesgo (Rendimiento bonos 10 años USA): {risk_free_rate:.2%}")
-
-```
-
-```{python}
-#| echo: false
-import yfinance as yf
-from datetime import datetime
-
-# Replace 'BCH' with the appropriate ticker symbol for Banco de Chile.
-ticker = 'BCH'
-
-# Initialize a Yahoo Finance object for the stock.
-stock = yf.Ticker(ticker)
-
-# Fetch the option chain.
-option_chain = stock.option_chain()
-
-# Get the expiration dates of the options.
-exp_dates = stock.options
-
-time_to_expiration_years = [(datetime.strptime(exp_date, '%Y-%m-%d') - datetime.now()).days / 365 for exp_date in exp_dates]
-
-strike_prices = option_chain.calls['strike']
-
-print("Precios del ejercicio:")
-print(strike_prices)
-
-print("Tiempo hasta la expiración (en años):")
-print(time_to_expiration_years)
-
-```
-
-```{python}
-#| echo: false
-
-import numpy as np
-import scipy.stats as si
-
-def volatilidad(ticker, periodo_t):
-    df = yf.download(ticker, period = '1y')
-
-    retornos_diarios = df['Adj Close'].pct_change()
-    # Se calcula la desviación estándar para cada periodo_t. Y luego, se obtiene el promedio anualizado por la cantidad de días.
-    sigma = retornos_diarios.rolling(periodo_t).std()
-    # Volatilidad anualizada
-    sigma = sigma.mean()*np.sqrt(periodo_t)
-    return sigma
-
-```
+Es importante mencionar que dado que los datos son extraídos de *Yahoo Finance* es posible que al correr el código nuevamente estos valores cambien.
 
 
 ## Aplicación modelo Black y Scholes
