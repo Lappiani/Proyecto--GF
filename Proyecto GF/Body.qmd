@@ -11,6 +11,8 @@ lang: es
 css: style.css
 number-sections: true
 warning: false
+crossref: 
+  chapters: true
 ---
 
 {{< include Hitos/Hito1.qmd >}}
@@ -18,6 +20,8 @@ warning: false
 {{< include Hitos/Hito2.qmd >}}
 
 <!--# Revisar el precio de ejercicio de las opciones que se agregaron, ya que cambia-->
+\newpage
+{{< include Hitos/Anexos.qmd >}}
 
 \newpage
 # Referencias {.unnumbered}

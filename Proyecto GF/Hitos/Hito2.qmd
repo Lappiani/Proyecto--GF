@@ -1,6 +1,9 @@
 # Aplicación de modelos de valoración de opciones y caso aplicado (Hito 2)
 
-## Ingesta de datos
+## Comentarios inciales
+Antes de comenzar con las secciones respectivas del hito, es importante mencionar que los códigos relacionados para cada modelo fueron dejados en el *jupyter notebook* que se encuentra en la carpeta de código. La razón de esto se explicará más adelante.
+
+## Ingesta de datos {#sec-Ingesta_datos}
 
 Antes de comenzar directamente con los modelos como tal, es importante mencionar que los datos necesarios para utilizar dichos modelos se obtuvieron de la librería de *python* de [@YahooFinance]. Esta permite el acceso a datos del mercado de una forma útil y simple, además de que ofrece datos recientes.
 
@@ -19,12 +22,12 @@ Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada. E
 |Tasa libre de riesgo                |4,92%  |
 |Precio del ejercicio                |20     |
 |Tiempo para el vencimiento (en años)|0,49   |
-:Valores utilizados para los modelos de valoración.
+:Valores utilizados para los modelos de valoración
 
 Es importante mencionar que dado que los datos son extraídos de *Yahoo Finance* es posible que al correr el código nuevamente estos valores cambien.
 
 
-## Aplicación modelo Black y Scholes
+## Aplicación modelo Black y Scholes {#sec-BS}
 
 Antes de comenzar con la valorización de la opción cuyo activo subyacente es la acción del Banco de Chile, se presentarán cuáles son los parámetros que este modelo necesita, y la fórmula respectiva. Los parámetros para el modelo son:
 \begin{itemize}
@@ -68,61 +71,14 @@ f) Es posible pedir prestado cualquier fracción del precio de un activo para co
 
 g) No hay penalizaciones asociadas a realizar una venta en corto. Un vendedor que no es dueño de un activo aceptará el precio del activo de un comprador, y llegará a un acuerdo con el mismo en una fecha futura, pagándole un monto equivalente al precio del activo en esa fecha.
 
-Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas [@black1973pricing].
+Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas [@black1973pricing]. Para efectos de código, se utilizaron los valores de los parámetros obtenidos en la @sec-Ingesta_datos. El código como tal no se agregó a este documento, debido a que el largo de ciertas líneas del mismo en algunos casos era tal que no se lograba ver la línea completa, debido a que esta se salía del documento (ver @sec-anexo). Ahora bien, igualmente se presentan los resultados obtenidos, @tbl-BS, por medio de este modelo, pero hay que tener en cuenta que debido a que los datos son obtenidos del mercado, es probable que al correr nuevamente el código algunos valores sean distintos.
 
-Entonces, teniendo los parámetros y la fórmula a utilizar, se puede realizar el siguiente código.
-```{python}
-#| echo: fenced
+|Precio opción call [@black1973pricing]|
+|:------------------------------------:|
+|0,136                                 |
+:Resultado aplicación modelo {#tbl-BS}
 
-import numpy as np
-import scipy.stats as si
-import yfinance as yf
 
-def volatilidad(ticker, periodo_t):
-    df = yf.download(ticker, period = '1y')
-
-    retornos_diarios = df['Adj Close'].pct_change()
-
-    sigma = retornos_diarios.rolling(periodo_t).std()*np.sqrt(periodo_t)
-    # Volatilidad anualizada
-    return sigma
-
-def black_scholes_call(S, K, T, r, sigma):
-    # S: Precio actual del activo subyacente.
-    # K: Precio del ejercicio de la opción.
-    # T: Tiempo de que falta para la fecha de vencimiento.
-    # r: Tasa libre de riesgo.
-    # sigma: Volatilidad del activo subyacente.
-    
-    d1 = (np.log(S / K) + (r + 0.5 * sigma ** 2) * T) / (sigma * np.sqrt(T))
-    d2 = d1 - sigma * np.sqrt(T)
-    call = (S * si.norm.cdf(d1, 0.0, 1.0) - K * np.exp(-r * T) * si.norm.cdf(d2, 0.0, 1.0))
-    return call
-
-ticker = 'CHILE.SN'
-data = yf.download(ticker, period='1d')
-
-# Precio actual de la acción del Banco de Chile.
-S = data['Close'][-1]
-
-# Precio del ejercicio.
-K = 100
-
-# Tiempo que falta para la fecha de vencimiento (en años)
-T = 1
-
-# Tasa libre de riesgo.
-r = 0.02
-
-# Volatilidad
-sigma = 0.2
-
-call_option_p = black_scholes_call(S, K, T, r, sigma)
-
-print(f'El precio para una opción call es: {call_option_p}')
-
-```
-De donde se obtiene el la valuación o precio de una opción de compra de la acción del Banco de Chile.
 
 ## Modelo adicional para valoración de opciones
 
@@ -157,66 +113,7 @@ con $g(y_i)$ una función arbitraria. Luego, los intervalos de confianza con un 
 \begin{equation*}
 \hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
 \end{equation*}
-Entonces, habiendo presentado la metodología, en conjunto con las expresiones necesarias, se muestra el código relacionado a continuación. Lo que se hizo primero fue programar una función que recibiera los parámetros necesarios, para luego entregar el resultado.
-
-```{python}
-#| echo: fenced
-#| code-overflow: wrap
-import numpy as np
-
-def monte_carlo_option_pricing_model(S, K, T, r, sigma, N, M, option_type='call', nivel_confianza=0.95):
-    """
-    S: Precio actual del activo.
-    K: Precio del ejercicio.
-    T: Tiempo para el vencimiento.
-    r: Tasa libre de riesgo.
-    sigma: Volatilidad del activo subyacente.
-    N: Cantidad de pasos en el tiempo.
-    M: Cantidad de simulaciones.
-    option_type: Tipo de la opción ('call' o 'put').
-    confidence_level: Nivel de confianza para el intervalo de confianza.
-    """
-    dt = T / N  # Paso tiempo
-    I = np.zeros(M)  # Se inicializan los precios para cada simulación
-
-    # Se simulan los M caminos del precio, para N pasos en el tiempo, cada uno.
-    for i in range(M):
-        S_t = S
-        for j in range(N):
-            S_t *= np.exp((r - 0.5 * sigma**2) * dt + sigma * np.sqrt(dt) * np.random.standard_normal())
-        
-        I[i] = S_t
-    
-    # Se calculan los "pagos" en el vencimiento.
-    if option_type == 'call':
-        pago = np.maximum(I - K, 0)
-    elif option_type == 'put':
-        pago = np.maximum(K - I, 0)
-
-    # Se descuentan los flujos para obtener el precio en t=0.
-    C = np.exp(-r * T) * np.sum(pago) / M
-
-    # Se calculan el precio promedio y el error estándar.
-    precio_promedio = np.mean(pago)
-    sd = np.std(pago, ddof=1) / np.sqrt(M)
-
-    # Se calcula el intervalo de confianza.
-    z = np.abs(np.percentile(np.random.normal(0, 1, M), (1 - nivel_confianza) * 100 / 2))
-    lower_bound = precio_promedio - z * sd
-    upper_bound = precio_promedio + z * sd
-
-    return C, (lower_bound, upper_bound)
-
-
-```
-
-Luego, para calcular el precio de la opción, se aplica la función con los parámetros respectivos. Los resultados obtenidos fueron los siguientes.
-
-| Valores                    |Resultados    |
-|:---------------------------|--------------|
-|Promedio                    |0,16          |
-|Intervalo de confianza (90%)|(0,067; 0,138)|
-:Resultados valoración por el enfoque Monte Carlo.
+Por último, al igual que en la @sec-BS, por motivos de formato no se presenta el código.
 
 ## Análisis Comparativo
 
@@ -228,7 +125,7 @@ En la siguiente sección se llevará a cabo un análisis de ambos modelos presen
 |:--------------|--------------|
 |Black y Scholes|0,136         |
 |Monte Carlo    |(0,067; 0,138)|
-:Análisis comparativo.
+:Análisis comparativo
 
 Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de [@black1973pricing] se encuentra dentro del intervalo de confianza resultante del método [@boyle1977options].
 
