@@ -188,7 +188,7 @@ calls = options_data.calls
 
 # Plot the strike price
 plt.plot(calls['strike'], label='Precio del ejercicio', color = 'blue')
-# plt.title('Evolución del precio del ejercicio de Opciones del BCH', fontsize = 18, loc='left')
+
 plt.xlabel('# Opción')
 plt.ylabel('Precio del ejercicio (USD)')
 plt.legend()

@@ -113,7 +113,12 @@ con $g(y_i)$ una función arbitraria. Luego, los intervalos de confianza con un 
 \begin{equation*}
 \hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
 \end{equation*}
-Por último, al igual que en la @sec-BS, por motivos de formato no se presenta el código.
+Por último, al igual que en la @sec-BS, por motivos de formato no se presenta el código. En cuanto al resultado este se puede observar en la @tbl-Mont.
+
+| Resultado (90% confianza)|
+|--------------------------|
+|(0,067; 0,138)            |
+: Resultados Monte Carlo {#tbl-Mont}
 
 ## Análisis Comparativo
 
@@ -125,9 +130,19 @@ En la siguiente sección se llevará a cabo un análisis de ambos modelos presen
 |:--------------|--------------|
 |Black y Scholes|0,136         |
 |Monte Carlo    |(0,067; 0,138)|
-:Análisis comparativo
+:Análisis comparativo {#tbl-comp}
 
 Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de [@black1973pricing] se encuentra dentro del intervalo de confianza resultante del método [@boyle1977options].
+
+Ahora, la diferencia entre los valores estimados por ambos modelos y el valor real de la opción en el momento que se corrió el código son los que se pueden ver en la @tbl-R.
+
+|Método         | Diferencias  |
+|:--------------|--------------|
+|Black y Scholes|%0,77         |
+|Monte Carlo    |%0,71         |
+:Diferencia entre valor estimado y valor real {#tbl-R}
+
+En ambos casos se puede observar que las diferencias son muy pequeñas (<1%), pero el método de Monte Carlo particular no debería presentarse como una diferencia entre el valor promedio y el valor real, ya que como son simulaciones se tiene que presentar en forma de intervalo de confianza.De igual forma, el valor real si se encontraba dentro del intervalo de confianza visto en la @tbl-comp.
 
 ### Características
 
@@ -139,6 +154,53 @@ Tercero, debido a la mayor capacidad de adaptación del enfoque de Monte Carlo y
 
 Finalmente, en cuanto al costo computacional, si la cantidad de simulaciones es muy grande, el enfoque de Monte Carlo puede llegar a ser costoso computacionalmente. Por otro lado, el modelo de Black y Scholes, como es una ecuación, provee resultados más rápido ya que no requiere realizar múltiples repeticiones.
 
+## Reporte Grupal: Caso Adminstración
+
+Se eligen uno de los siguientes casos con tal de replicar y responder sus preguntas de acuerdo al activo principal elegido:
+Caso Administración de Capital de Trabajo de Keafer Manufacturing de la página 822 del ROSS.
+Caso Administración de Efectivo de Richmond Corporation de la página 845 del ROSS.
+Caso Administración de Efectivo de Braam Industries de la página 874 del ROSS.
+En este caso, el grupo eligió el Caso Administración de Efectivo de Braam Industries, donde se debe examinar la política de crédito de la compañía para ver si una política diferente podría contribuir a aumentar la rentabilidad. En ese caso, una vez determinada la política de crédito actual, se proponen 3 opciones para cambiar esta política, y se debe determinar cuál es la mejor alternativa y determinar inconsistencias.
+
+Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en los E.E.F.F. de la compañía para el año 2022 [@ParqueArauco2022] toda la información necesaria para poder resolver el caso, tales como los ingresos por ventas, el monto en cuentas por cobrar, los costos administrativos, los costos variables de la operación, etc. La información encontrada fue la siguiente:
+
+| Ítem                                          |Monto              |
+|-----------------------------------------------|------------------:|
+| Ingresos por Ventas Anuales                   | \$243.119.543.000 |
+| Monto Neto de Deudores por venta 2022 (CLP\$) | \$22.420.967.000  |
+| Monto Neto de Deudores por venta 2021 (CLP\$) | \$23.653.332.000  |
+| Costos Administrativos (CLP\$)                | \$22.424.419.000  |
+| Costo de las Ventas (CLP\$)                   | \$55.126.662.000  |
+
+:Información recopilada [@ParqueArauco2022]
+
+Con esta información, fue posible obtener las ventas anuales, la tasa de incumplimiento y los costos administrativos como porcentaje de las ventas, además del periodo de cuentas por cobrar y los costos variables que se tienen con la política de crédito actual. 
+
+La tasa de incumplimiento como porcentaje de las ventas corresponde a la división entre el Monto Neto de Deudores por Venta para el año 2022 y las Ventas Anuales. Los costos administrativos como porcentaje de las ventas corresponden a la división entre los Costos Administrativos y las Ventas Anuales. El periodo de cuentas por cobrar corresponde a la división entre el promedio del Monto Neto de Deudores inicial y final, con las Ventas Anuales, y todo eso dividido por 365 para obtener la cantidad de días. Por último, los costos variables como porcentaje corresponden a la división entre los Costos de las Ventas y las Ventas Anuales.
+
+Los resultados se presentan a continuación:
+
+| Concepto                            | Valor            |
+|-------------------------------------|-----------------:|
+| Ventas Anuales (CLP)                | \$243.119.543.000|
+| Tasa de Incumplimiento (% Ventas)   | 9,22%            |
+| Costos Administrativos (% Ventas)   | 9,22%            |
+| Periodo de cuentas por cobrar (Días)| 34,58            |
+| Costos Variables                    | 23%              |
+: Resultados
+
+También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.
+
+En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.
+
+| Opción | VPN (CLP)           |
+|--------|--------------------:|
+| 1      | 43.300.724.413,19   |
+| 2      | 38.355.341.091,22   |
+| 3      | 43.791.215.884,26   |
+: Valor presente neto de las diferentes opciones
+
+De donde se observa que la opción que obtiene el mayor valor es la opción 3, luego esta debería ser la política a adoptar por parte de la empresa. Ahora, en cuanto a los costos de incumplimiento y costos administrativos de la opción 3 y 2, es extraño que si la opción 3 genera más ingresos, esta tenga menores costos asociados. Por lo tanto, aunque los gastos y las ventas no siempre están directamente relacionados, al examinar los detalles, se observa que los gastos de la opción 3 no son inferiores a los de la opción 2. Por consiguiente, la afirmación inicial no parece factible.
 
 
-<!--# El valor tengo que presentarlo en forma de intervalo de confianza, ya que es una simluación.-->
+
