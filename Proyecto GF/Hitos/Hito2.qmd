@@ -1,0 +1,206 @@
+# Aplicación de modelos de valoración de opciones y caso aplicado (Hito 2)
+
+## Comentarios inciales
+Antes de comenzar con las secciones respectivas del hito, es importante mencionar que los códigos relacionados para cada modelo fueron dejados en el *jupyter notebook* que se encuentra en la carpeta de código. La razón de esto se explicará más adelante.
+
+## Ingesta de datos {#sec-Ingesta_datos}
+
+Antes de comenzar directamente con los modelos como tal, es importante mencionar que los datos necesarios para utilizar dichos modelos se obtuvieron de la librería de *python* de [@YahooFinance]. Esta permite el acceso a datos del mercado de una forma útil y simple, además de que ofrece datos recientes.
+
+Algunos de los parámetros importantes a obtener son:
+
+  * La tasa libre de riesgo.
+  
+  * El precio del ejercicio y tiempo para el vencimiento de la opción cuyo activo subyacente sea la acción del Banco de Chile.
+  
+  * La volatilidad de la acción del Banco de Chile.
+  
+Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada. En lo que respecta a los valores de estos tres parámetros, se utilizaron los que se pueden ver en la siguiente tabla.
+
+|Parámetro                           | Valor |
+|:-----------------------------------|-------|
+|Tasa libre de riesgo                |4,92%  |
+|Precio del ejercicio                |20     |
+|Tiempo para el vencimiento (en años)|0,49   |
+:Valores utilizados para los modelos de valoración
+
+Es importante mencionar que dado que los datos son extraídos de *Yahoo Finance* es posible que al correr el código nuevamente estos valores cambien.
+
+
+## Aplicación modelo Black y Scholes {#sec-BS}
+
+Antes de comenzar con la valorización de la opción cuyo activo subyacente es la acción del Banco de Chile, se presentarán cuáles son los parámetros que este modelo necesita, y la fórmula respectiva. Los parámetros para el modelo son:
+\begin{itemize}
+\item $S$: Precio actual de la acción.
+\item $K$: Precio del ejercicio o \textit{strike price} de la opción.
+\item $t$: Tiempo que falta para el vencimiento (en años).
+\item $\sigma$: Variación del rendimiento de la acción.
+\item $R$: La tasa libre de riesgo.
+\end{itemize}
+Luego, la fórmula para el modelo continuo es la siguiente:
+\begin{equation}
+\label{eq:BS}
+C(S,t) = S\cdot \Phi(d_1) - K\cdot \exp(-R\cdot T) \cdot \Phi(d_{2})\;,
+\end{equation}
+donde,
+\begin{align*}
+d_1 &= \frac{\log\left(\frac{S}{K}\right) + \left(R + \frac{\sigma^2}{2}\right)\cdot t}{\sqrt{\sigma^2 \cdot t}}\;,\\
+d_2 &= d_1 - \sqrt{\sigma^2 \cdot t}\;.
+\end{align*}
+Esta formulación para valuar opciones tiene una serie de supuestos. Estos últimos son condiciones de mercado de carácter ``ideal" para acciones y la opción respectiva [@black1973pricing]. A continuación se presenta una lista con los supuestos, donde se pone más énfasis al segundo, debido a que este puede ser un tanto complejo de comprender.
+
+a) La tasa de interés de corto plazo es conocida y constate en el tiempo.
+
+b) El precio de la acción sigue un ``*ramdom walk*" en tiempo continuo con una tasa de variación proporcional al cuadrado del precio de la acción. Luego, la distribución de posibles precios de acciones al final de cualquier intervalo finito es *log-normal*. La tasa de variación de los retornos de la acción es constante.
+
+    * En cuanto al ``*random walk*", esto implica que los cambios en el precio de la acción son aleatorias y no pueden ser predecidas con información histórica de la misma.
+    
+    * Luego, en cuanto a la proporcionalidad, esto se refiere a que la variabilidad o volatilidad del precio de la acción es constante en el tiempo. Lo cual implica que grandes cambios en el precio son raros, y los cambios pequeños son más comúnes.
+    
+    * Después, en lo que respecta a la distribución, esto significa que el logaritmo de del precio de las acciones siguen una distribución normal.
+    
+    * Por último, el modelo asume que la tasa a la cual los retornos de la acción varían, se mantiene constante en el tiempo. Por ende, si bien el precio de la acción puede cambiar de forma inesperada, la tasa a la cual suceden estos cambios se mantiene estable.
+
+c) La acción no paga dividendos ni ningún otro tipo de distribuciones.
+
+d) La opción es ``Europea", es decir, solo puede ser ejercida en la fecha de vencimiento.
+
+e) No hay costos de transacción en las compras o ventas de la acción o la opción respectiva.
+
+f) Es posible pedir prestado cualquier fracción del precio de un activo para comprarlo o venderlo, a una tasa de interés de corto plazo.
+
+g) No hay penalizaciones asociadas a realizar una venta en corto. Un vendedor que no es dueño de un activo aceptará el precio del activo de un comprador, y llegará a un acuerdo con el mismo en una fecha futura, pagándole un monto equivalente al precio del activo en esa fecha.
+
+Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas [@black1973pricing]. Para efectos de código, se utilizaron los valores de los parámetros obtenidos en la @sec-Ingesta_datos. El código como tal no se agregó a este documento, debido a que el largo de ciertas líneas del mismo en algunos casos era tal que no se lograba ver la línea completa, debido a que esta se salía del documento (ver @sec-anexo). Ahora bien, igualmente se presentan los resultados obtenidos, @tbl-BS, por medio de este modelo, pero hay que tener en cuenta que debido a que los datos son obtenidos del mercado, es probable que al correr nuevamente el código algunos valores sean distintos.
+
+|Precio opción call [@black1973pricing]|
+|:------------------------------------:|
+|0,136                                 |
+:Resultado aplicación modelo {#tbl-BS}
+
+
+
+## Modelo adicional para valoración de opciones
+
+Existe una gran variedad de modelos además del que se presenta en [@black1973pricing]. Ahora bien, estos suelen ser bastante complejos en cuanto a la formulación, por lo que se escogió una alternativa más simple en comparación a esto últimos. El modelo adicional que se presentará corresponde al uno que tiene un enfoque basado en el método de simulación de Monte Carlo [@boyle1977options].
+
+Este modelo se utiliza para la valuación de opciones ``Europeas", al igual que el modelo de Black y Scholes [@black1973pricing]. Para presentar la metodología y fórmulas asociadas al modelo, primero se mostrarán los parámetros necesarios.
+
+- $S_t=$ El precio actual de la acción en el tiempo $t$.
+
+- $r=$ La tasa libre de riesgo por trimestre compuesta continuamente\footnote{Esto significa que los intereses se calculan sobre el capital más el interés obtenido en el periodo anterior.}.
+
+- $\sigma^2=$ varianza trimestral de la acción subyacente, se asume constante.
+
+- $D_t =$ dividendo que se paga en el tiempo $t$; dividendos pagaderos trimestralmente.
+
+- $E=$ Precio del ejercicio de la opción.
+
+- $T=$ Fecha de vencimiento de la opción.
+
+Además, es importante mencionar que se asume que el tiempo está **medido en trimestres**. También, se asume que $S_t$ representa el precio de la acción justo después del dividendo trimestral $D_t$ haya sido pagado.
+
+En lo que respecta a la metodología, para comenzar la simulación se genera un valor para $S_{t+1}$. Si el valor es mayor a $D_{t+1}$ entonces $(S_{t+1}-D_{t+1})$ es usado como el valor inicial para el segundo periodo, y el procedimiento continua, hasta llegar a $S_{T}$. Si en algún momento $S_{t+m}\{m=1,2,\dots ,(T-t-1)\}$ es menor o igual al pago de dividendo correspondiente $D_{t+m}$ el proceso se detiene. En este caso una nueva simulación comienza nuevamente desde el tiempo $t$. Una serie de experimentos de simulación son llevados a cabo, y el valor esperado de $\max\{S_{T}-E,0\}$ es calculado. El valor es después descontado a una tasa libre de riesgo para calcular una estimación del valor de la opción $\hat{g}$. Luego se calcula la varianza de la estimación por medio de la siguiente ecuación.
+\begin{equation}
+\label{eq:sd}
+\hat{s}^{2} = \frac{1}{(n-1)}\sum^{n}_{i=1}\left(g(y_i) - \hat{g}\right)^2\;,
+\end{equation}
+donde,
+\begin{equation*}
+\hat{g} = \frac{1}{n}\sum^{n}_{i=1}g(y_i)\;,
+\end{equation*}
+con $g(y_i)$ una función arbitraria. Luego, los intervalos de confianza con un 95\% de confianza son calculados de la siguiente forma,
+\begin{equation*}
+\hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
+\end{equation*}
+Por último, al igual que en la @sec-BS, por motivos de formato no se presenta el código. En cuanto al resultado este se puede observar en la @tbl-Mont.
+
+| Resultado (90% confianza)|
+|--------------------------|
+|(0,067; 0,138)            |
+: Resultados Monte Carlo {#tbl-Mont}
+
+## Análisis Comparativo
+
+En la siguiente sección se llevará a cabo un análisis de ambos modelos presentados. Primero se contrastan los resultados obtenidos por cada modelo. Los resultados que se obtuvieron fueron los que se puede observar en la siguiente tabla.
+
+### Resultados
+
+|Método         | Resultado    |
+|:--------------|--------------|
+|Black y Scholes|0,136         |
+|Monte Carlo    |(0,067; 0,138)|
+:Análisis comparativo {#tbl-comp}
+
+Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de [@black1973pricing] se encuentra dentro del intervalo de confianza resultante del método [@boyle1977options].
+
+Ahora, la diferencia entre los valores estimados por ambos modelos y el valor real de la opción en el momento que se corrió el código son los que se pueden ver en la @tbl-R.
+
+|Método         | Diferencias  |
+|:--------------|--------------|
+|Black y Scholes|%0,77         |
+|Monte Carlo    |%0,71         |
+:Diferencia entre valor estimado y valor real {#tbl-R}
+
+En ambos casos se puede observar que las diferencias son muy pequeñas (<1%), pero el método de Monte Carlo particular no debería presentarse como una diferencia entre el valor promedio y el valor real, ya que como son simulaciones se tiene que presentar en forma de intervalo de confianza.De igual forma, el valor real si se encontraba dentro del intervalo de confianza visto en la @tbl-comp.
+
+### Características
+
+Ahora se revisarán diferentes características de los modelos en los que difieren estos últimos. Primero, el modelo de Black y Scholes entrega una solución analítica para la valoración de opciones. Tiene una ecuación que calcula directamente el precio de la opción. El modelo se construye en base a múltiples supuestos, dentro de los cuales se encuentran volatilidad constante y una tasa libre de riesgo. Por otro lado, el enfoque de Monte Carlo es un método numérico. Tal como se mencionó, utiliza el muestreo aleatorio para estimar los precio de opciones. Este método no provee una formula directa, utiliza múltiples simulaciones para estimar el precio de una opción.
+
+Segundo, el modelo de Black y Scholes hace supuestos que simplifican el modelo, dentro de los cuales están volatilidad constante, una tasa libre de riesgo y una distribución de los retornos *Log-normal*. Estas últimas no se cumplen siempre en algunos escenarios. El enfoque de Monte Carlo se puede acomodar a supuestos más realísticos y complejos. Un ejemplo de esto último puede ser niveles de volatilidad que varían o tasas de interés, lo cual hace que el modelo se adapte a una mayor variedad de situaciones.
+
+Tercero, debido a la mayor capacidad de adaptación del enfoque de Monte Carlo ya mencionado, esto lo hace más preciso. No así el modelo de Black y Scholes, ya que como se mencionó, depende de múltiples supuestos.
+
+Finalmente, en cuanto al costo computacional, si la cantidad de simulaciones es muy grande, el enfoque de Monte Carlo puede llegar a ser costoso computacionalmente. Por otro lado, el modelo de Black y Scholes, como es una ecuación, provee resultados más rápido ya que no requiere realizar múltiples repeticiones.
+
+## Reporte Grupal: Caso Adminstración
+
+Se eligen uno de los siguientes casos con tal de replicar y responder sus preguntas de acuerdo al activo principal elegido:
+Caso Administración de Capital de Trabajo de Keafer Manufacturing de la página 822 del ROSS.
+Caso Administración de Efectivo de Richmond Corporation de la página 845 del ROSS.
+Caso Administración de Efectivo de Braam Industries de la página 874 del ROSS.
+En este caso, el grupo eligió el Caso Administración de Efectivo de Braam Industries, donde se debe examinar la política de crédito de la compañía para ver si una política diferente podría contribuir a aumentar la rentabilidad. En ese caso, una vez determinada la política de crédito actual, se proponen 3 opciones para cambiar esta política, y se debe determinar cuál es la mejor alternativa y determinar inconsistencias.
+
+Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en los E.E.F.F. de la compañía para el año 2022 [@ParqueArauco2022] toda la información necesaria para poder resolver el caso, tales como los ingresos por ventas, el monto en cuentas por cobrar, los costos administrativos, los costos variables de la operación, etc. La información encontrada fue la siguiente:
+
+| Ítem                                          |Monto              |
+|-----------------------------------------------|------------------:|
+| Ingresos por Ventas Anuales                   | \$243.119.543.000 |
+| Monto Neto de Deudores por venta 2022 (CLP\$) | \$22.420.967.000  |
+| Monto Neto de Deudores por venta 2021 (CLP\$) | \$23.653.332.000  |
+| Costos Administrativos (CLP\$)                | \$22.424.419.000  |
+| Costo de las Ventas (CLP\$)                   | \$55.126.662.000  |
+
+:Información recopilada [@ParqueArauco2022]
+
+Con esta información, fue posible obtener las ventas anuales, la tasa de incumplimiento y los costos administrativos como porcentaje de las ventas, además del periodo de cuentas por cobrar y los costos variables que se tienen con la política de crédito actual. 
+
+La tasa de incumplimiento como porcentaje de las ventas corresponde a la división entre el Monto Neto de Deudores por Venta para el año 2022 y las Ventas Anuales. Los costos administrativos como porcentaje de las ventas corresponden a la división entre los Costos Administrativos y las Ventas Anuales. El periodo de cuentas por cobrar corresponde a la división entre el promedio del Monto Neto de Deudores inicial y final, con las Ventas Anuales, y todo eso dividido por 365 para obtener la cantidad de días. Por último, los costos variables como porcentaje corresponden a la división entre los Costos de las Ventas y las Ventas Anuales.
+
+Los resultados se presentan a continuación:
+
+| Concepto                            | Valor            |
+|-------------------------------------|-----------------:|
+| Ventas Anuales (CLP)                | \$243.119.543.000|
+| Tasa de Incumplimiento (% Ventas)   | 9,22%            |
+| Costos Administrativos (% Ventas)   | 9,22%            |
+| Periodo de cuentas por cobrar (Días)| 34,58            |
+| Costos Variables                    | 23%              |
+: Resultados
+
+También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.
+
+En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.
+
+| Opción | VPN (CLP)           |
+|--------|--------------------:|
+| 1      | 43.300.724.413,19   |
+| 2      | 38.355.341.091,22   |
+| 3      | 43.791.215.884,26   |
+: Valor presente neto de las diferentes opciones
+
+De donde se observa que la opción que obtiene el mayor valor es la opción 3, luego esta debería ser la política a adoptar por parte de la empresa. Ahora, en cuanto a los costos de incumplimiento y costos administrativos de la opción 3 y 2, es extraño que si la opción 3 genera más ingresos, esta tenga menores costos asociados. Por lo tanto, aunque los gastos y las ventas no siempre están directamente relacionados, al examinar los detalles, se observa que los gastos de la opción 3 no son inferiores a los de la opción 2. Por consiguiente, la afirmación inicial no parece factible.
+
+
+

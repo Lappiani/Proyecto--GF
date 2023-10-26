@@ -1,0 +1,30 @@
+---
+title: "Proyecto Gestión Financiera"
+author: "Luca Appiani (Grupo 13)"
+format: 
+  pdf:
+    code-block-border-left: true
+    code-overflow: wrap
+date: today
+bibliography: biblio.bib
+lang: es
+css: style.css
+number-sections: true
+warning: false
+crossref: 
+  chapters: true
+---
+
+{{< include Hitos/Hito1.qmd >}}
+
+{{< include Hitos/Hito2.qmd >}}
+
+<!--# Revisar el precio de ejercicio de las opciones que se agregaron, ya que cambia-->
+\newpage
+{{< include Hitos/Anexos.qmd >}}
+
+\newpage
+# Referencias {.unnumbered}
+
+::: {#refs}
+:::
