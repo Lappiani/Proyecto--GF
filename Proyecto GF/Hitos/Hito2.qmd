@@ -191,7 +191,17 @@ Los resultados se presentan a continuación:
 
 También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.
 
-En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.
+En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Estas se presentan en 
+
+| Opciones | Ventas Anuales (CLP) | Tasa de Incumplimiento (% Ventas) | Costos Administrativos (% Ventas) | Periodo de Cuentas por Cobrar (Días) |
+|:----------------------:|:-----------------------------------:|:-----------------------------------:|:-------------------------------------:|
+| \$274.725.083.590 | 14,08% | 15,56% | 37 |
+| \$257.706.715.580 | 10,29% | 10,95% | 46 |
+| \$289.312.256.170 | 10,44% | 12,11% | 45 |
+
+
+
+Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.
 
 | Opción | VPN (CLP)           |
 |--------|--------------------:|
