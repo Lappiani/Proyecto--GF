@@ -1,0 +1,5 @@
+---
+format: revealjs
+title: "Proyecto Gestión Financiera"
+---
+## Hito 1
