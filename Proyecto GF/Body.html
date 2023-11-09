@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Luca Appiani (Grupo 13)">
+<meta name="dcterms.date" content="2023-09-28">
+
+<title>Proyecto Gestión Financiera</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="Body_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Body_files/libs/quarto-html/quarto.js"></script>
+<script src="Body_files/libs/quarto-html/popper.min.js"></script>
+<script src="Body_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Body_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Body_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Body_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Body_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Body_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Body_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Proyecto Gestión Financiera</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Luca Appiani (Grupo 13) </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">09/28/2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="descripción-activo-y-contexto-hito-1" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Descripción Activo y Contexto (Hito 1)</h1>
+<section id="definición" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="definición"><span class="header-section-number">1.1</span> Definición</h2>
+<p>El sector de estudio en este caso particular corresponde al sector bancario. Este último incluye a todas las instituciones financieras conocidas como “bancos” que ayudan a las personas guardar su dinero. Los bancos le ofrecen la oportunidad a las personas de abrir cuentas para el propósito que necesiten, ya sea de ahorro o para inversión. Los servicios principales que ofrecen estas instituciones incluyen almacenaje, transferencia, extender crédito o el manejo de riesgos asociados a mantener diversos niveles de riqueza. Esta industria es una que es sustentable en el tiempo, de hecho, según un estudio por <span class="citation" data-cites="isnurhadi2022banking">(<a href="#ref-isnurhadi2022banking" role="doc-biblioref">Isnurhadi et&nbsp;al. 2022</a>)</span> que revisa diferentes factores que afectan al crecimiento sustentable de la industria bancaria, es que esta última logra mantener un crecimiento sustentable a pesar de estar expuesta a muchos factores de riesgo.</p>
+<p>El activo a estudiar corresponde a la acción del <strong>Banco de Chile</strong>. Este es uno de los bancos comerciales más grandes del país. Al igual que otros bancos en el país, ofrece una gran variedad de productos bancarios y servicios financieros, dentro de los cuales están banca en línea, servicios de inversión y portales internacionales de negocio. El objetivo de dichas soluciones financieras es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.</p>
+<p>En el siguiente gráfico se observa la evolución del precio de la acción en la Bolsa de Santiago.</p>
+<div class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="precio_accion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="Body_files/figure-html/precio_accion-output-1.png" width="598" height="413" class="figure-img"></p>
+<figcaption class="figure-caption">Precio de la acción ``CHILE.SN” en CLP.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<table class="table">
+<caption>Valores hasta la fecha 27-09-2023 <span class="citation" data-cites="BolsadeSantiago2023">(<a href="#ref-BolsadeSantiago2023" role="doc-biblioref"><span>«Bolsa de Santiago»</span> 2023</a>)</span></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Periodo</th>
+<th style="text-align: left;">Rentabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mes actual</td>
+<td style="text-align: left;">-3.06%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mes anterior</td>
+<td style="text-align: left;">-0.43%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Año actual (YTD)</td>
+<td style="text-align: left;">14.04%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Año anterior</td>
+<td style="text-align: left;">32.21%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="motivación" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="motivación"><span class="header-section-number">1.2</span> Motivación</h2>
+<p>Las instituciones financieras llevan a cabo funciones muy importantes en la economía tales como: mecanismos de pagos, juntan la oferta con la demanda en los mercados financieros, manejan instrumentos financieros complejos, entre otros <span class="citation" data-cites="anbar2011bank">(<a href="#ref-anbar2011bank" role="doc-biblioref">Anbar y Alper 2011</a>)</span>. De estas entidades, los bancos son las más importantes en muchas economías. Esto último ya que como intermediario financieros, proveen un conjunto diverso de servicios, y la eficiencia de este proceso de intermediación puede afectar al crecimiento económico. De hecho, la insolvencia de un banco puede tener efectos muy negativos para el sistema financiero de un país, como causar una crisis bancaria, que corresponde a la quiebra subsecuente de otros bancos comerciales debido a problemas de liquidez.</p>
+<p>Si bien la motivación por la cual se escogió este activo se respalda por razones no numéricas, los números presentados en la sección anterior de definición de activo ayudaron un poco a la elección. Esto último ya que los retornos de la acción desde inicio de año hasta la fecha (<em>YTD</em>) fueron muy positivos, al igual que los retornos del año anterior.</p>
+</section>
+<section id="contexto" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="contexto"><span class="header-section-number">1.3</span> Contexto</h2>
+<p>Las tres variables/activos que se definirán en esta sección corresponden a la TPM que define el Banco central de Chile, el DXY (<em>US Dollar Index</em>) y el DEPUC (Índice de Incertidumbre Económica y Política).</p>
+<section id="tpm" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="tpm"><span class="header-section-number">1.3.1</span> TPM</h3>
+<p>Para la <strong>Tasa de Política Monetaria</strong>, esta corresponde a la tasa a la que el Banco Central del Chile le presta capital a los bancos comerciales del país <span class="citation" data-cites="BCentral2023TPM">(<a href="#ref-BCentral2023TPM" role="doc-biblioref"><span>«Política Monetaria»</span> 2023</a>)</span>. Por lo tanto, si esta tiene valores altos los bancos reciben un mayor interés en sus depósitos, por ende, tienen más incentivos para entregar a sus clientes mejores tasas de interés en instrumentos financieros de ahorro, como por ejemplo, depósitos a plazo. Pero, por otro lado, se encarece la prestación de fondos, lo cual afecta a las tasas de interés de los créditos. Luego, los factores mencionados corresponden a formas en las que la TPM puede afectar al Banco de Chile.</p>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Body_files/figure-html/cell-3-output-1.png" width="585" height="429" class="figure-img"></p>
+<figcaption class="figure-caption">Tasa de Política Monetaria, evolución trimestral.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>El gráfico ilustra la trayectoria de la Tasa de Política Monetaria (TPM) a lo largo de los distintos trimestres. Se destaca el punto rojo, que representa la TPM correspondiente a septiembre, derivada de la última reunión de política monetaria. A través del gráfico, se puede apreciar que la tasa mantuvo niveles elevados durante un período, pero recientemente ha iniciado una tendencia descendente, la cual probablemente va a continuar en los próximos meses, debido a los comunicados que ha hecho el Banco Central <span class="citation" data-cites="BCCh2023">(<a href="#ref-BCCh2023" role="doc-biblioref">B. C. de Chile 2023</a>)</span>.</p>
+</section>
+<section id="dxy" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="dxy"><span class="header-section-number">1.3.2</span> DXY</h3>
+<p>Luego, con respecto al <strong>DXY</strong>, es una medida del valor del dólar americano con respecto a una canasta de divisas foráneas <span class="citation" data-cites="Forex2023">(<a href="#ref-Forex2023" role="doc-biblioref"><span>«What is the Dollar Index?»</span> 2023</a>)</span>. El valor de este índice puede afectar al sector bancario o particularmente al Banco de Chile, debido a que uno de los objetivos que tiene el Banco Central es controlar el tipo de cambio, ya que este último afecta a la inflación. Por lo que si el valor del índice se encuentra alto, es decir que el dolar se valorizado con respecto a otras divisas, probablemente el Banco Central se enfocará en una política monetaria más restrictiva, subiendo la TPM, la cual se mencionó cómo afecta a los bancos comerciales.</p>
+<div class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Body_files/figure-html/cell-4-output-1.png" width="602" height="447" class="figure-img"></p>
+<figcaption class="figure-caption">Evolución del valor del DXY en el tiempo.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>En este último gráfico se aprecia el cambio del índice desde principio de año hasta la fecha.</p>
+</section>
+<section id="depuc" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="depuc"><span class="header-section-number">1.3.3</span> DEPUC</h3>
+<p>Por último, el <strong>DEPUC</strong>, es una medida general de percepción e incertidumbre económica que se construye a partir de la frecuencia de <em>tweets</em> que contienen palabras relacionadas con la economía general, acciones políticas, incertidumbre o coyuntura inicial, publicadas diariamente por diversas cuentas <span class="citation" data-cites="PercepcionesEconomicas2023">(<a href="#ref-PercepcionesEconomicas2023" role="doc-biblioref"><span>«Un índice de incertidumbre político-económica basado en Twitter»</span> 2023</a>)</span>. Entonces, en base a esto, el valor que toma esta medida puede afectar al Banco en múltiples áreas tales como: asignación de créditos, inversiones, entre otros.</p>
+<div class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Body_files/figure-html/cell-5-output-1.png" width="582" height="411" class="figure-img"></p>
+<figcaption class="figure-caption">Evolución del Índice de Incertidumbre Económica.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>En este se puede apreciar la evolución del índice DEPUC en Chile entre los años 2012 y 2023. Un aspecto a destacar es cómo el valor de esta medida comienza a incrementar en el año 2019, lo cual puede ser explicado por la pandemia y el estallido social, ambos, eventos que causaron un gran nivel de incertidumbre en el país. A pesar de esto último, se observa como el índice actualmente se encuentra en niveles pre-pandemia.</p>
+</section>
+</section>
+<section id="análisis-de-largo-plazo" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="análisis-de-largo-plazo"><span class="header-section-number">1.4</span> Análisis de Largo Plazo</h2>
+<section id="caracterización-deuda-aplicación-cap.-15" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="caracterización-deuda-aplicación-cap.-15"><span class="header-section-number">1.4.1</span> Caracterización deuda (Aplicación cap. 15)</h3>
+<p>En lo que respecta a <strong>acciones comunes</strong> para el caso del Banco de Chile se tiene la acción del mismo que se mencionó con anterioridad en la sección de definición. Particularmente, de acuerdo con <span class="citation" data-cites="BancoChile2023">(<a href="#ref-BancoChile2023" role="doc-biblioref">B. de Chile 2023b</a>)</span>, las acciones del Banco de Chile se dividen en:</p>
+<ul>
+<li>13.168.424.178 acciones nominativas.</li>
+</ul>
+<p>Que se distribuyen como sigue:</p>
+<ul>
+<li>4% Acciones serie “A”.</li>
+<li>77.6% Acciones preferentes serie “B”.</li>
+<li>3.0% Acciones preferentes serie “D”.</li>
+<li>8.3% Acciones serie “E”.</li>
+</ul>
+<p>Un fenómeno que se puede ver en esta distribución de acciones es el hecho que existen diferentes series. Esto hay que recordar que se suele realizar generalmente con el objetivo de diferenciar el derecho a voto.</p>
+<p>Otro detalle es que también existen acciones que se transan en la bolsa de Nueva York, cuyo precio está en dólares. El nemotécnico por el cual transan estas acciones en el <em>NYSE</em> es BCH.</p>
+<p>En lo que respecta a bonos, según <span class="citation" data-cites="BancoDeChile2023">(<a href="#ref-BancoDeChile2023" role="doc-biblioref">B. de Chile 2023a</a>)</span> la entidad realizó una emisión el 12 de junio del presente año, de bonos bajo su nuevo marco de financiamiento sostenible (<em>ESG framework</em>), cuyos recursos se destinaron a emprendimientos liderados por mujeres. Este tipo de prestamos “verdes” se podría clasificar como que tienen una clausula de protección positiva, ya que de cierta forma se especifica una acción que la empresa debe cumplir. Esto último, con el objetivo de mejorar la relación con los acreedores de dicha deuda.</p>
+<p>Normalmente, este tipo de bonos suelen tener métricas asociadas cuyo cumplimiento afecta directamente la tasa del bono. Por lo que, se pueden clasificar de cierta forma como bonos de tasa flotante.</p>
+</section>
+<section id="caracterización-de-emisiones-históricas-aplicación-cap.-20" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="caracterización-de-emisiones-históricas-aplicación-cap.-20"><span class="header-section-number">1.4.2</span> Caracterización de emisiones históricas (Aplicación cap. 20)</h3>
+<p>En lo que respecta a emisiones históricas, el 4 de mayo del año 2011 el Banco de Chile realizó un aumento de capital donde se subastaron 1.398.023.524 acciones de un accionista controlador. Estas acciones fueron ofrecidas a los accionistas del banco y a la Sociedad Matriz del Banco de Chile. Debido a que se ofrecieron a los accionistas del Banco, esta se puede categorizar como una <strong>oferta directa de derechos de suscripción</strong>.</p>
+<p>Para llevar a cabo esta oferta, la junta del Banco acordó la colocación 2.081.685.335 acciones. Esta parte de la emisión corresponde a las etapas de conferencias previas a la suscripción, y presentación y aprobación de registro <span class="citation" data-cites="ross2022corporate">(<a href="#ref-ross2022corporate" role="doc-biblioref">Ross et&nbsp;al. 2022</a>)</span>. Luego siguen las etapas de fijación del precio de la emisión, oferta pública y venta, y estabilización del mercado. Ahora, como se mencionó anteriormente que esta emisión corresponde a una oferta directa de derechos de suscripción, por lo que para la etapa de oferta pública y venta, las nuevas acciones se ofrecen directamente a los accionistas de la empresa.</p>
+</section>
+<section id="relación-con-activos-derivados" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="relación-con-activos-derivados"><span class="header-section-number">1.4.3</span> Relación con activos derivados</h3>
+<p>Un derivado relacionado a la acción del Banco de Chile corresponde a los que se transan en la bolsa de Nueva York o <em>NYSE</em>, por sus siglas en inglés <span class="citation" data-cites="YahooFinance2023BCH">(<a href="#ref-YahooFinance2023BCH" role="doc-biblioref"><span>«Banco de Chile (BCH) Opciones de la cadena - Yahoo Finanzas»</span> 2023</a>)</span>. La evolución del precio del ejercicio de estas opciones se puede ver en el siguiente gráfico.</p>
+<div class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Body_files/figure-html/cell-6-output-1.png" width="597" height="430" class="figure-img"></p>
+<figcaption class="figure-caption">Evolución del precio del ejercicio de Opciones del BCH.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Cabe destacar que las opciones presentadas en esta sección corresponden opciones de compra o <em>call</em>. Este derivado puede ser de importancia para la acción del banco por varias razones, pero una de ellas es que los volúmenes de compra o venta de estas opciones le puede servir a los inversionistas para posiblemente anticipar futuros movimientos del activo subyacente, que en este caso es la acción.</p>
+<p>Un detalle a considerar es que las opciones que se mencionaron se transan en la bolsa de Nueva York, esto da como evidencia lo pequeño que es el mercado de derivados en Chile, ya que al momento de buscar información de estos, no se encontraron resultados.</p>
+</section>
+</section>
+<section id="reporte-grupal" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="reporte-grupal"><span class="header-section-number">1.5</span> Reporte grupal</h2>
+<p>Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados <span class="math inline">\({\mu}\)</span> y la matriz de covarianza de los activos que componen el portafolio <span class="math inline">\({\Sigma}\)</span>, se calcularon los pesos <span class="math inline">\(\mathbf{w}\)</span> de cada activo. El problema de optimización a maximizar fue el siguiente:</p>
+<p><span class="math display">\[
+\max_{\mathbf{w}} \left\{{\mu} - \delta \mathbf{w}^{\intercal}{\Sigma}\mathbf{w} \right\}
+\]</span> Sujeto a: <span class="math display">\[\begin{align}
+&amp;\sum_{i} w_{i} = 1 &amp;\\
+&amp;0\leq w_{i}\leq 1 &amp;
+\end{align}\]</span></p>
+<p>Si bien no se está maximizando el ratio de <em>Sharpe</em> necesariamente, se penaliza la función objetivo con un grado <span class="math inline">\(\delta\)</span> a la función objetivo por la varianza del portafolio. Luego, de acuerdo al factor de penalización se puede definir un portafolio con mayor o menor grado de aversión al riesgo, pues mientras mayor sea el factor, más se penalizará la función objetivo en función del riesgo y viceversa.</p>
+<p>En este caso, se decidió tomar un perfil de inversión conservador, dada la recesión que vive la economía chilena en la actualidad. También, se decidió que la información a utilizar para calcular los retornos y sus varianzas sería a partir del 2021, con el fin de considerar los últimos efectos de la pandemia y no la pandemia en su totalidad, por ser un evento muy aislado que altera los resultados. También, se consideró este horizonte de información por ser una inversión a corto plazo, y por lo tanto es mejor considerar las situaciones más recientes de los activos que toda la información histórica, pues la información reciente es más representativa.</p>
+<p>Con todo esto, fue posible obtener la información de los retornos, definir el grado del factor de penalización y maximizar los retornos en función del riesgo asumido. Así, los resultados de los pesos de cada activo en el portafolio fueron los siguientes:</p>
+<table class="table">
+<caption>Composición del portafolio</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Acción</th>
+<th>Pesos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Banco de Chile</td>
+<td>68.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parque Arauco</td>
+<td>10.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">COPEC</td>
+<td>21.4%</td>
+</tr>
+</tbody>
+</table>
+<p>Cuyo rendimiento esperado es de 1.113%.</p>
+</section>
+</section>
+<section id="aplicación-de-modelos-de-valoración-de-opciones-y-caso-aplicado-hito-2" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Aplicación de modelos de valoración de opciones y caso aplicado (Hito 2)</h1>
+<section id="comentarios-inciales" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="comentarios-inciales"><span class="header-section-number">2.1</span> Comentarios inciales</h2>
+<p>Antes de comenzar con las secciones respectivas del hito, es importante mencionar que los códigos relacionados para cada modelo fueron dejados en el <em>jupyter notebook</em> que se encuentra en la carpeta de código. La razón de esto se explicará más adelante.</p>
+</section>
+<section id="sec-Ingesta_datos" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-Ingesta_datos"><span class="header-section-number">2.2</span> Ingesta de datos</h2>
+<p>Antes de comenzar directamente con los modelos como tal, es importante mencionar que los datos necesarios para utilizar dichos modelos se obtuvieron de la librería de <em>python</em> de <span class="citation" data-cites="YahooFinance">(<a href="#ref-YahooFinance" role="doc-biblioref"><span>«Yahoo Finance»</span> Accessed 2023-10-21</a>)</span>. Esta permite el acceso a datos del mercado de una forma útil y simple, además de que ofrece datos recientes.</p>
+<p>Algunos de los parámetros importantes a obtener son:</p>
+<ul>
+<li><p>La tasa libre de riesgo.</p></li>
+<li><p>El precio del ejercicio y tiempo para el vencimiento de la opción cuyo activo subyacente sea la acción del Banco de Chile.</p></li>
+<li><p>La volatilidad de la acción del Banco de Chile.</p></li>
+</ul>
+<p>Estos se obtuvieron mediante la librería de <em>Yahoo Finance</em> antes mencionada. En lo que respecta a los valores de estos tres parámetros, se utilizaron los que se pueden ver en la siguiente tabla.</p>
+<table class="table">
+<caption>Valores utilizados para los modelos de valoración</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parámetro</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tasa libre de riesgo</td>
+<td>4,92%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Precio del ejercicio</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tiempo para el vencimiento (en años)</td>
+<td>0,49</td>
+</tr>
+</tbody>
+</table>
+<p>Es importante mencionar que dado que los datos son extraídos de <em>Yahoo Finance</em> es posible que al correr el código nuevamente estos valores cambien.</p>
+</section>
+<section id="sec-BS" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-BS"><span class="header-section-number">2.3</span> Aplicación modelo Black y Scholes</h2>
+Antes de comenzar con la valorización de la opción cuyo activo subyacente es la acción del Banco de Chile, se presentarán cuáles son los parámetros que este modelo necesita, y la fórmula respectiva. Los parámetros para el modelo son:
+<p>Luego, la fórmula para el modelo continuo es la siguiente: <span class="math display">\[\begin{equation}
+\label{eq:BS}
+C(S,t) = S\cdot \Phi(d_1) - K\cdot \exp(-R\cdot T) \cdot \Phi(d_{2})\;,
+\end{equation}\]</span> donde, <span class="math display">\[\begin{align*}
+d_1 &amp;= \frac{\log\left(\frac{S}{K}\right) + \left(R + \frac{\sigma^2}{2}\right)\cdot t}{\sqrt{\sigma^2 \cdot t}}\;,\\
+d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
+\end{align*}\]</span> Esta formulación para valuar opciones tiene una serie de supuestos. Estos últimos son condiciones de mercado de carácter ``ideal” para acciones y la opción respectiva <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span>. A continuación se presenta una lista con los supuestos, donde se pone más énfasis al segundo, debido a que este puede ser un tanto complejo de comprender.</p>
+<ol type="a">
+<li><p>La tasa de interés de corto plazo es conocida y constate en el tiempo.</p></li>
+<li><p>El precio de la acción sigue un ``<em>ramdom walk</em>” en tiempo continuo con una tasa de variación proporcional al cuadrado del precio de la acción. Luego, la distribución de posibles precios de acciones al final de cualquier intervalo finito es <em>log-normal</em>. La tasa de variación de los retornos de la acción es constante.</p>
+<ul>
+<li><p>En cuanto al ``<em>random walk</em>”, esto implica que los cambios en el precio de la acción son aleatorias y no pueden ser predecidas con información histórica de la misma.</p></li>
+<li><p>Luego, en cuanto a la proporcionalidad, esto se refiere a que la variabilidad o volatilidad del precio de la acción es constante en el tiempo. Lo cual implica que grandes cambios en el precio son raros, y los cambios pequeños son más comúnes.</p></li>
+<li><p>Después, en lo que respecta a la distribución, esto significa que el logaritmo de del precio de las acciones siguen una distribución normal.</p></li>
+<li><p>Por último, el modelo asume que la tasa a la cual los retornos de la acción varían, se mantiene constante en el tiempo. Por ende, si bien el precio de la acción puede cambiar de forma inesperada, la tasa a la cual suceden estos cambios se mantiene estable.</p></li>
+</ul></li>
+<li><p>La acción no paga dividendos ni ningún otro tipo de distribuciones.</p></li>
+<li><p>La opción es ``Europea”, es decir, solo puede ser ejercida en la fecha de vencimiento.</p></li>
+<li><p>No hay costos de transacción en las compras o ventas de la acción o la opción respectiva.</p></li>
+<li><p>Es posible pedir prestado cualquier fracción del precio de un activo para comprarlo o venderlo, a una tasa de interés de corto plazo.</p></li>
+<li><p>No hay penalizaciones asociadas a realizar una venta en corto. Un vendedor que no es dueño de un activo aceptará el precio del activo de un comprador, y llegará a un acuerdo con el mismo en una fecha futura, pagándole un monto equivalente al precio del activo en esa fecha.</p></li>
+</ol>
+<p>Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span>. Para efectos de código, se utilizaron los valores de los parámetros obtenidos en la <a href="#sec-Ingesta_datos">Sección&nbsp;2.2</a>. El código como tal no se agregó a este documento, debido a que el largo de ciertas líneas del mismo en algunos casos era tal que no se lograba ver la línea completa, debido a que esta se salía del documento (ver <a href="#sec-anexo">Capítulo&nbsp;3</a>). Ahora bien, igualmente se presentan los resultados obtenidos, <a href="#tbl-BS">Tabla&nbsp;2.1</a>, por medio de este modelo, pero hay que tener en cuenta que debido a que los datos son obtenidos del mercado, es probable que al correr nuevamente el código algunos valores sean distintos.</p>
+<div id="tbl-BS" class="anchored">
+<table class="table">
+<caption>Tabla&nbsp;2.1: Resultado aplicación modelo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Precio opción call <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0,136</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modelo-adicional-para-valoración-de-opciones" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="modelo-adicional-para-valoración-de-opciones"><span class="header-section-number">2.4</span> Modelo adicional para valoración de opciones</h2>
+<p>Existe una gran variedad de modelos además del que se presenta en <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span>. Ahora bien, estos suelen ser bastante complejos en cuanto a la formulación, por lo que se escogió una alternativa más simple en comparación a esto últimos. El modelo adicional que se presentará corresponde al uno que tiene un enfoque basado en el método de simulación de Monte Carlo <span class="citation" data-cites="boyle1977options">(<a href="#ref-boyle1977options" role="doc-biblioref">Boyle 1977</a>)</span>.</p>
+<p>Este modelo se utiliza para la valuación de opciones ``Europeas”, al igual que el modelo de Black y Scholes <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span>. Para presentar la metodología y fórmulas asociadas al modelo, primero se mostrarán los parámetros necesarios.</p>
+<ul>
+<li><p><span class="math inline">\(S_t=\)</span> El precio actual de la acción en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(r=\)</span> La tasa libre de riesgo por trimestre compuesta continuamente.</p></li>
+<li><p><span class="math inline">\(\sigma^2=\)</span> varianza trimestral de la acción subyacente, se asume constante.</p></li>
+<li><p><span class="math inline">\(D_t =\)</span> dividendo que se paga en el tiempo <span class="math inline">\(t\)</span>; dividendos pagaderos trimestralmente.</p></li>
+<li><p><span class="math inline">\(E=\)</span> Precio del ejercicio de la opción.</p></li>
+<li><p><span class="math inline">\(T=\)</span> Fecha de vencimiento de la opción.</p></li>
+</ul>
+<p>Además, es importante mencionar que se asume que el tiempo está <strong>medido en trimestres</strong>. También, se asume que <span class="math inline">\(S_t\)</span> representa el precio de la acción justo después del dividendo trimestral <span class="math inline">\(D_t\)</span> haya sido pagado.</p>
+<p>En lo que respecta a la metodología, para comenzar la simulación se genera un valor para <span class="math inline">\(S_{t+1}\)</span>. Si el valor es mayor a <span class="math inline">\(D_{t+1}\)</span> entonces <span class="math inline">\((S_{t+1}-D_{t+1})\)</span> es usado como el valor inicial para el segundo periodo, y el procedimiento continua, hasta llegar a <span class="math inline">\(S_{T}\)</span>. Si en algún momento <span class="math inline">\(S_{t+m}\{m=1,2,\dots ,(T-t-1)\}\)</span> es menor o igual al pago de dividendo correspondiente <span class="math inline">\(D_{t+m}\)</span> el proceso se detiene. En este caso una nueva simulación comienza nuevamente desde el tiempo <span class="math inline">\(t\)</span>. Una serie de experimentos de simulación son llevados a cabo, y el valor esperado de <span class="math inline">\(\max\{S_{T}-E,0\}\)</span> es calculado. El valor es después descontado a una tasa libre de riesgo para calcular una estimación del valor de la opción <span class="math inline">\(\hat{g}\)</span>. Luego se calcula la varianza de la estimación por medio de la siguiente ecuación. <span class="math display">\[\begin{equation}
+\label{eq:sd}
+\hat{s}^{2} = \frac{1}{(n-1)}\sum^{n}_{i=1}\left(g(y_i) - \hat{g}\right)^2\;,
+\end{equation}\]</span> donde, <span class="math display">\[\begin{equation*}
+\hat{g} = \frac{1}{n}\sum^{n}_{i=1}g(y_i)\;,
+\end{equation*}\]</span> con <span class="math inline">\(g(y_i)\)</span> una función arbitraria. Luego, los intervalos de confianza con un 95% de confianza son calculados de la siguiente forma, <span class="math display">\[\begin{equation*}
+\hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
+\end{equation*}\]</span> Por último, al igual que en la <a href="#sec-BS">Sección&nbsp;2.3</a>, por motivos de formato no se presenta el código. En cuanto al resultado este se puede observar en la <a href="#tbl-Mont">Tabla&nbsp;2.2</a>.</p>
+<div id="tbl-Mont" class="anchored">
+<table class="table">
+<caption>Tabla&nbsp;2.2: Resultados Monte Carlo</caption>
+<thead>
+<tr class="header">
+<th>Resultado (90% confianza)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0,067; 0,138)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="análisis-comparativo" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="análisis-comparativo"><span class="header-section-number">2.5</span> Análisis Comparativo</h2>
+<p>En la siguiente sección se llevará a cabo un análisis de ambos modelos presentados. Primero se contrastan los resultados obtenidos por cada modelo. Los resultados que se obtuvieron fueron los que se puede observar en la siguiente tabla.</p>
+<section id="resultados" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="resultados"><span class="header-section-number">2.5.1</span> Resultados</h3>
+<div id="tbl-comp" class="anchored">
+<table class="table">
+<caption>Tabla&nbsp;2.3: Análisis comparativo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Método</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Black y Scholes</td>
+<td>0,136</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Monte Carlo</td>
+<td>(0,067; 0,138)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de <span class="citation" data-cites="black1973pricing">(<a href="#ref-black1973pricing" role="doc-biblioref">Black y Scholes 1973</a>)</span> se encuentra dentro del intervalo de confianza resultante del método <span class="citation" data-cites="boyle1977options">(<a href="#ref-boyle1977options" role="doc-biblioref">Boyle 1977</a>)</span>.</p>
+<p>Ahora, la diferencia entre los valores estimados por ambos modelos y el valor real de la opción en el momento que se corrió el código son los que se pueden ver en la <a href="#tbl-R">Tabla&nbsp;2.4</a>.</p>
+<div id="tbl-R" class="anchored">
+<table class="table">
+<caption>Tabla&nbsp;2.4: Diferencia entre valor estimado y valor real</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Método</th>
+<th>Diferencias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Black y Scholes</td>
+<td>%0,77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Monte Carlo</td>
+<td>%0,71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En ambos casos se puede observar que las diferencias son muy pequeñas (&lt;1%), pero el método de Monte Carlo particular no debería presentarse como una diferencia entre el valor promedio y el valor real, ya que como son simulaciones se tiene que presentar en forma de intervalo de confianza.De igual forma, el valor real si se encontraba dentro del intervalo de confianza visto en la <a href="#tbl-comp">Tabla&nbsp;2.3</a>.</p>
+</section>
+<section id="características" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="características"><span class="header-section-number">2.5.2</span> Características</h3>
+<p>Ahora se revisarán diferentes características de los modelos en los que difieren estos últimos. Primero, el modelo de Black y Scholes entrega una solución analítica para la valoración de opciones. Tiene una ecuación que calcula directamente el precio de la opción. El modelo se construye en base a múltiples supuestos, dentro de los cuales se encuentran volatilidad constante y una tasa libre de riesgo. Por otro lado, el enfoque de Monte Carlo es un método numérico. Tal como se mencionó, utiliza el muestreo aleatorio para estimar los precio de opciones. Este método no provee una formula directa, utiliza múltiples simulaciones para estimar el precio de una opción.</p>
+<p>Segundo, el modelo de Black y Scholes hace supuestos que simplifican el modelo, dentro de los cuales están volatilidad constante, una tasa libre de riesgo y una distribución de los retornos <em>Log-normal</em>. Estas últimas no se cumplen siempre en algunos escenarios. El enfoque de Monte Carlo se puede acomodar a supuestos más realísticos y complejos. Un ejemplo de esto último puede ser niveles de volatilidad que varían o tasas de interés, lo cual hace que el modelo se adapte a una mayor variedad de situaciones.</p>
+<p>Tercero, debido a la mayor capacidad de adaptación del enfoque de Monte Carlo ya mencionado, esto lo hace más preciso. No así el modelo de Black y Scholes, ya que como se mencionó, depende de múltiples supuestos.</p>
+<p>Finalmente, en cuanto al costo computacional, si la cantidad de simulaciones es muy grande, el enfoque de Monte Carlo puede llegar a ser costoso computacionalmente. Por otro lado, el modelo de Black y Scholes, como es una ecuación, provee resultados más rápido ya que no requiere realizar múltiples repeticiones.</p>
+</section>
+</section>
+<section id="reporte-grupal-caso-adminstración" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="reporte-grupal-caso-adminstración"><span class="header-section-number">2.6</span> Reporte Grupal: Caso Adminstración</h2>
+<p>Se eligen uno de los siguientes casos con tal de replicar y responder sus preguntas de acuerdo al activo principal elegido: Caso Administración de Capital de Trabajo de Keafer Manufacturing de la página 822 del ROSS. Caso Administración de Efectivo de Richmond Corporation de la página 845 del ROSS. Caso Administración de Efectivo de Braam Industries de la página 874 del ROSS. En este caso, el grupo eligió el Caso Administración de Efectivo de Braam Industries, donde se debe examinar la política de crédito de la compañía para ver si una política diferente podría contribuir a aumentar la rentabilidad. En ese caso, una vez determinada la política de crédito actual, se proponen 3 opciones para cambiar esta política, y se debe determinar cuál es la mejor alternativa y determinar inconsistencias.</p>
+<p>Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en los E.E.F.F. de la compañía para el año 2022 <span class="citation" data-cites="ParqueArauco2022">(<a href="#ref-ParqueArauco2022" role="doc-biblioref"><span>«Estados Financieros Consolidados Parque Arauco»</span> 2022</a>)</span> toda la información necesaria para poder resolver el caso, tales como los ingresos por ventas, el monto en cuentas por cobrar, los costos administrativos, los costos variables de la operación, etc. La información encontrada fue la siguiente:</p>
+<table class="table">
+<caption>Información recopilada <span class="citation" data-cites="ParqueArauco2022">(<a href="#ref-ParqueArauco2022" role="doc-biblioref"><span>«Estados Financieros Consolidados Parque Arauco»</span> 2022</a>)</span></caption>
+<thead>
+<tr class="header">
+<th>Ítem</th>
+<th style="text-align: right;">Monto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ingresos por Ventas Anuales</td>
+<td style="text-align: right;">$243.119.543.000</td>
+</tr>
+<tr class="even">
+<td>Monto Neto de Deudores por venta 2022 (CLP$)</td>
+<td style="text-align: right;">$22.420.967.000</td>
+</tr>
+<tr class="odd">
+<td>Monto Neto de Deudores por venta 2021 (CLP$)</td>
+<td style="text-align: right;">$23.653.332.000</td>
+</tr>
+<tr class="even">
+<td>Costos Administrativos (CLP$)</td>
+<td style="text-align: right;">$22.424.419.000</td>
+</tr>
+<tr class="odd">
+<td>Costo de las Ventas (CLP$)</td>
+<td style="text-align: right;">$55.126.662.000</td>
+</tr>
+</tbody>
+</table>
+<p>Con esta información, fue posible obtener las ventas anuales, la tasa de incumplimiento y los costos administrativos como porcentaje de las ventas, además del periodo de cuentas por cobrar y los costos variables que se tienen con la política de crédito actual.</p>
+<p>La tasa de incumplimiento como porcentaje de las ventas corresponde a la división entre el Monto Neto de Deudores por Venta para el año 2022 y las Ventas Anuales. Los costos administrativos como porcentaje de las ventas corresponden a la división entre los Costos Administrativos y las Ventas Anuales. El periodo de cuentas por cobrar corresponde a la división entre el promedio del Monto Neto de Deudores inicial y final, con las Ventas Anuales, y todo eso dividido por 365 para obtener la cantidad de días. Por último, los costos variables como porcentaje corresponden a la división entre los Costos de las Ventas y las Ventas Anuales.</p>
+<p>Los resultados se presentan a continuación:</p>
+<table class="table">
+<caption>Resultados</caption>
+<thead>
+<tr class="header">
+<th>Concepto</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ventas Anuales (CLP)</td>
+<td style="text-align: right;">$243.119.543.000</td>
+</tr>
+<tr class="even">
+<td>Tasa de Incumplimiento (% Ventas)</td>
+<td style="text-align: right;">9,22%</td>
+</tr>
+<tr class="odd">
+<td>Costos Administrativos (% Ventas)</td>
+<td style="text-align: right;">9,22%</td>
+</tr>
+<tr class="even">
+<td>Periodo de cuentas por cobrar (Días)</td>
+<td style="text-align: right;">34,58</td>
+</tr>
+<tr class="odd">
+<td>Costos Variables</td>
+<td style="text-align: right;">23%</td>
+</tr>
+</tbody>
+</table>
+<p>También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.</p>
+<p>En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Estas se presentan en</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Opciones</th>
+<th style="text-align: center;">Ventas Anuales (CLP)</th>
+<th style="text-align: center;">Tasa de Incumplimiento (% Ventas)</th>
+<th style="text-align: center;">Costos Administrativos (% Ventas)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">$274.725.083.590</td>
+<td style="text-align: center;">14,08%</td>
+<td style="text-align: center;">15,56%</td>
+<td style="text-align: center;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">$257.706.715.580</td>
+<td style="text-align: center;">10,29%</td>
+<td style="text-align: center;">10,95%</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">$289.312.256.170</td>
+<td style="text-align: center;">10,44%</td>
+<td style="text-align: center;">12,11%</td>
+<td style="text-align: center;">45</td>
+</tr>
+</tbody>
+</table>
+<p>Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.</p>
+<table class="table">
+<caption>Valor presente neto de las diferentes opciones</caption>
+<thead>
+<tr class="header">
+<th>Opción</th>
+<th style="text-align: right;">VPN (CLP)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: right;">43.300.724.413,19</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: right;">38.355.341.091,22</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: right;">43.791.215.884,26</td>
+</tr>
+</tbody>
+</table>
+<p>De donde se observa que la opción que obtiene el mayor valor es la opción 3, luego esta debería ser la política a adoptar por parte de la empresa. Ahora, en cuanto a los costos de incumplimiento y costos administrativos de la opción 3 y 2, es extraño que si la opción 3 genera más ingresos, esta tenga menores costos asociados. Por lo tanto, aunque los gastos y las ventas no siempre están directamente relacionados, al examinar los detalles, se observa que los gastos de la opción 3 no son inferiores a los de la opción 2. Por consiguiente, la afirmación inicial no parece factible.</p>
+<!--# Revisar el precio de ejercicio de las opciones que se agregaron, ya que cambia-->
+</section>
+</section>
+<section id="sec-anexo" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Anexos</h1>
+<section id="ejemplo-código-modelos-de-valoración-de-opciones" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="ejemplo-código-modelos-de-valoración-de-opciones"><span class="header-section-number">3.1</span> Ejemplo código modelos de valoración de opciones</h2>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monte_carlo_option_pricing_model(S, K, T, r, sigma, N, M, option_type<span class="op">=</span><span class="st">'call'</span>, nivel_confianza<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    S: Precio actual del activo.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    K: Precio del ejercicio.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    T: Tiempo para el vencimiento.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    r: Tasa libre de riesgo.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    sigma: Volatilidad del activo subyacente.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    N: Cantidad de pasos en el tiempo.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    M: Cantidad de simulaciones.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    option_type: Tipo de la opción ('call' o 'put').</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    confidence_level: Nivel de confianza para el intervalo de confianza.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> T <span class="op">/</span> N  <span class="co"># Paso tiempo</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    I <span class="op">=</span> np.zeros(M)  <span class="co"># Se inicializan los precios para cada simulación</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Se simulan los M caminos del precio, para N pasos en el tiempo, cada uno.</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M):</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        S_t <span class="op">=</span> S</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            S_t <span class="op">*=</span> np.exp((r <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> dt <span class="op">+</span> sigma <span class="op">*</span> np.sqrt(dt) <span class="op">*</span> np.random.standard_normal())</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(S_t)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        I[i] <span class="op">=</span> S_t</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Se calculan los "pagos" en el vencimiento.</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> option_type <span class="op">==</span> <span class="st">'call'</span>:</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        pago <span class="op">=</span> np.maximum(I <span class="op">-</span> K, <span class="dv">0</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> option_type <span class="op">==</span> <span class="st">'put'</span>:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        pago <span class="op">=</span> np.maximum(K <span class="op">-</span> I, <span class="dv">0</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Se descuentan los flujos para obtener el precio en t=0.</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    C <span class="op">=</span> np.exp(<span class="op">-</span>r <span class="op">*</span> T) <span class="op">*</span> np.<span class="bu">sum</span>(pago) <span class="op">/</span> M</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Se calculan el precio promedio y el error estándar.</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    precio_promedio <span class="op">=</span> np.mean(pago)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    sd <span class="op">=</span> np.std(pago, ddof<span class="op">=</span><span class="dv">1</span>) <span class="op">/</span> np.sqrt(M)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Se calcula el intervalo de confianza.</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.<span class="bu">abs</span>(np.percentile(np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, M), (<span class="dv">1</span> <span class="op">-</span> nivel_confianza) <span class="op">*</span> <span class="dv">100</span> <span class="op">/</span> <span class="dv">2</span>))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    lower_bound <span class="op">=</span> precio_promedio <span class="op">-</span> z <span class="op">*</span> sd</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    upper_bound <span class="op">=</span> precio_promedio <span class="op">+</span> z <span class="op">*</span> sd</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C, (lower_bound, upper_bound)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="referencias" class="level1 unnumbered">
+<h1 class="unnumbered">Referencias</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-anbar2011bank" class="csl-entry" role="listitem">
+Anbar, Adem, y Deger Alper. 2011. <span>«Bank Specific and Macroeconomic Determinants of Commercial Bank Profitability: Empirical Evidence from Turkey»</span>. <em>Business and Economics Research Journal</em> 2 (2): 139-52.
+</div>
+<div id="ref-YahooFinance2023BCH" class="csl-entry" role="listitem">
+<span>«Banco de Chile (BCH) Opciones de la cadena - Yahoo Finanzas»</span>. 2023. Yahoo Finance. <a href="https://es.finance.yahoo.com/quote/BCH/options/?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuYmluZy5jb20v&amp;guce_referrer_sig=AQAAALRsD2Am3yZd8mBpW94mVeqccq_Tqd411u1GuJww65SC58YY0WSXj1-iu9DnvPL5zYRNiNuPo1hw7CjJKxFxL0SNHQ9OhdSgXwm8dn0_lSVAW_tig4Lkt6g2xpY5V3zqE9slTqW3e2jndv5ZiB8hMNLmYPYkA5r0Y8qGEIiFveur">https://es.finance.yahoo.com/quote/BCH/options/?guccounter=1&amp;guce_referrer=aHR0cHM6Ly93d3cuYmluZy5jb20v&amp;guce_referrer_sig=AQAAALRsD2Am3yZd8mBpW94mVeqccq_Tqd411u1GuJww65SC58YY0WSXj1-iu9DnvPL5zYRNiNuPo1hw7CjJKxFxL0SNHQ9OhdSgXwm8dn0_lSVAW_tig4Lkt6g2xpY5V3zqE9slTqW3e2jndv5ZiB8hMNLmYPYkA5r0Y8qGEIiFveur</a>.
+</div>
+<div id="ref-black1973pricing" class="csl-entry" role="listitem">
+Black, Fischer, y Myron Scholes. 1973. <span>«The pricing of options and corporate liabilities»</span>. <em>Journal of political economy</em> 81 (3): 637-54.
+</div>
+<div id="ref-BolsadeSantiago2023" class="csl-entry" role="listitem">
+<span>«Bolsa de Santiago»</span>. 2023. <a href="https://www.bolsadesantiago.com/">https://www.bolsadesantiago.com/</a>.
+</div>
+<div id="ref-boyle1977options" class="csl-entry" role="listitem">
+Boyle, Phelim P. 1977. <span>«Options: A monte carlo approach»</span>. <em>Journal of financial economics</em> 4 (3): 323-38.
+</div>
+<div id="ref-BCCh2023" class="csl-entry" role="listitem">
+Chile, Banco Central de. 2023. <span>«Informe de Política Monetaria»</span>. <a href="https://www.bcentral.cl/areas/politica-monetaria/informe-de-politica-monetaria">https://www.bcentral.cl/areas/politica-monetaria/informe-de-politica-monetaria</a>.
+</div>
+<div id="ref-BancoDeChile2023" class="csl-entry" role="listitem">
+Chile, Banco de. 2023a. <span>«Banco de Chile emite bono por US$ 40 millones para financiar emprendimientos liderados por mujeres»</span>. <a href="https://portales.bancochile.cl/nuestrobanco/novedades/emprendimiento/detalles/banco-de-chile-emite-bono-por-us-40-millones-para-financiar-emprendimientos-liderados-por-mujeres" class="uri">https://portales.bancochile.cl/nuestrobanco/novedades/emprendimiento/detalles/banco-de-chile-emite-bono-por-us-40-millones-para-financiar-emprendimientos-liderados-por-mujeres</a>.
+</div>
+<div id="ref-BancoChile2023" class="csl-entry" role="listitem">
+———. 2023b. <span>«Estatutos»</span>. <a href="https://portales.bancochile.cl/uploads/000/014/283/454fc1aa-8169-483e-adfc-89bda01b70d3/original/Estatutos.pdf">https://portales.bancochile.cl/uploads/000/014/283/454fc1aa-8169-483e-adfc-89bda01b70d3/original/Estatutos.pdf</a>.
+</div>
+<div id="ref-ParqueArauco2022" class="csl-entry" role="listitem">
+<span>«Estados Financieros Consolidados Parque Arauco»</span>. 2022. <a href="https://parquearauco.modyocdn.com/uploads/cc910618-497f-483b-9e31-160f8c6721b8/original/Estados_Financieros_Consolidados_Parque_Arauco_94627000_202212.pdf">https://parquearauco.modyocdn.com/uploads/cc910618-497f-483b-9e31-160f8c6721b8/original/Estados_Financieros_Consolidados_Parque_Arauco_94627000_202212.pdf</a>.
+</div>
+<div id="ref-isnurhadi2022banking" class="csl-entry" role="listitem">
+Isnurhadi, Isnurhadi, Sulastri Sulastri, Yulia Saftiana, y Ferry Jie. 2022. <span>«Banking Industry Sustainable Growth Rate under Risk: Empirical Study of the Banking Industry in ASEAN Countries»</span>. <em>Sustainability</em> 15 (1): 1-21.
+</div>
+<div id="ref-BCentral2023TPM" class="csl-entry" role="listitem">
+<span>«Política Monetaria»</span>. 2023. <a href="https://www.bcentral.cl/web/banco-central/areas/politica-monetaria_ant">https://www.bcentral.cl/web/banco-central/areas/politica-monetaria_ant</a>.
+</div>
+<div id="ref-ross2022corporate" class="csl-entry" role="listitem">
+Ross, Stephen, Randolph Westerfield, Jeffrey Jaffe, y Bradford Jordan. 2022. <em>Corporate Finance</em>. McGraw Hill.
+</div>
+<div id="ref-PercepcionesEconomicas2023" class="csl-entry" role="listitem">
+<span>«Un índice de incertidumbre político-económica basado en Twitter»</span>. 2023. <a href="https://www.percepcioneseconomicas.cl/indices/un-indice-de-incertidumbre-politico-economica-basado-en-twitter/">https://www.percepcioneseconomicas.cl/indices/un-indice-de-incertidumbre-politico-economica-basado-en-twitter/</a>.
+</div>
+<div id="ref-Forex2023" class="csl-entry" role="listitem">
+<span>«What is the Dollar Index?»</span> 2023. <a href="https://www.forex.com/es-latam/news-and-analysis/what-is-the-dollar-index/">https://www.forex.com/es-latam/news-and-analysis/what-is-the-dollar-index/</a>.
+</div>
+<div id="ref-YahooFinance" class="csl-entry" role="listitem">
+<span>«Yahoo Finance»</span>. Accessed 2023-10-21. Accessed 2023-10-21. <a href="https://finance.yahoo.com">https://finance.yahoo.com</a>.
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
