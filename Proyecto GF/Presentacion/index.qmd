@@ -1,7 +1,33 @@
 ---
-format: revealjs
+format: 
+  revealjs:
+    slide-number: true
+    title-slide-attributes: 
+      data-background-image: "Logos/LOGO_UANDES.png"
+      data-background-position: 98% 1%
+      data-background-size: 15%
 title: "Proyecto Gestión Financiera"
+author: 
+  - Luca Appiani
+  - Antonia Banduc
+  - Gerardo Rozas
+toc: true
+lang: es
 ---
-## Hito 1
 
-- Contenido del hito 1
+
+# Selección de activos
+
+Los activos desarrollados en esa ocasión fueron los siguientes.
+
+|Nombre Activo | Ticker    |
+|:-------------|-----------|
+|Banco de Chile|CHILE.SN   |
+|Parque Arauco |PARAUCO.SN |
+|COPEC         |COPEC.SN   |
+
+## Banco de Chile
+
+- Uno de los bancos comerciales más grandes del país.
+- Ofrece una gran variedad de productos bancarios y servicios financieros.
+- Cuyo **objetivo** es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.

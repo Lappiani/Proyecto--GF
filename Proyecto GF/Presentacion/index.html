@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="es"><head>
 <script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/tabby.min.js"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
@@ -10,6 +10,9 @@
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
+  <meta name="author" content="Luca Appiani">
+  <meta name="author" content="Antonia Banduc">
+  <meta name="author" content="Gerardo Rozas">
   <title>Proyecto Gestión Financiera</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -323,22 +326,76 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-image="Logos/LOGO_UANDES.png" data-background-position="98% 1%" data-background-size="15%" class="quarto-title-block center">
   <h1 class="title">Proyecto Gestión Financiera</h1>
 
 <div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Luca Appiani 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Antonia Banduc 
+</div>
+</div>
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Gerardo Rozas 
+</div>
+</div>
 </div>
 
-</section>
-<section id="hito-1" class="slide level2">
-<h2>Hito 1</h2>
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Tabla de contenidos</h2>
 <ul>
-<li>Contenido del hito 1</li>
+<li><a href="#/selección-de-activos" id="/toc-selección-de-activos">Selección de activos</a>
+<ul>
+<li><a href="#/banco-de-chile" id="/toc-banco-de-chile">Banco de Chile</a></li>
+</ul></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="selección-de-activos" class="title-slide slide level1 center">
+<h1>Selección de activos</h1>
+<p>Los activos desarrollados en esa ocasión fueron los siguientes.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nombre Activo</th>
+<th>Ticker</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Banco de Chile</td>
+<td>CHILE.SN</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parque Arauco</td>
+<td>PARAUCO.SN</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">COPEC</td>
+<td>COPEC.SN</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="banco-de-chile" class="slide level2">
+<h2>Banco de Chile</h2>
+<ul>
+<li>Uno de los bancos comerciales más grandes del país.</li>
+<li>Ofrece una gran variedad de productos bancarios y servicios financieros.</li>
+<li>Cuyo <strong>objetivo</strong> es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.</li>
 </ul>
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -391,7 +448,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -601,12 +658,12 @@
         // flash "checked"
         button.classList.add('code-copy-button-checked');
         var currentTitle = button.getAttribute("title");
-        button.setAttribute("title", "Copied!");
+        button.setAttribute("title", "Copiado");
         let tooltip;
         if (window.bootstrap) {
           button.setAttribute("data-bs-toggle", "tooltip");
           button.setAttribute("data-bs-placement", "left");
-          button.setAttribute("data-bs-title", "Copied!");
+          button.setAttribute("data-bs-title", "Copiado");
           tooltip = new bootstrap.Tooltip(button, 
             { trigger: "manual", 
               customClass: "code-copy-button-tooltip",
