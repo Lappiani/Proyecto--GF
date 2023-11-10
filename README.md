@@ -7,3 +7,5 @@ El informe está en el documento de ```Body.pdf```, y todos los códigos relacio
 [Presentación](https://lappiani.github.io/Proyecto--GF/Presentacion)
 
 [Reporte](https://lappiani.github.io/Proyecto--GF/Body.html)
+
+[Aplicación](https://74k0mg-luca-appiani0caro.shinyapps.io/aplicacion/)
