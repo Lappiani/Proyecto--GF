@@ -22,7 +22,7 @@ Estos se obtuvieron mediante la librería de *Yahoo Finance* antes mencionada. E
 |Tasa libre de riesgo                |4,92%  |
 |Precio del ejercicio                |20     |
 |Tiempo para el vencimiento (en años)|0,49   |
-:Valores utilizados para los modelos de valoración
+:Valores utilizados para los modelos de valoración {#tbl-params}
 
 Es importante mencionar que dado que los datos son extraídos de *Yahoo Finance* es posible que al correr el código nuevamente estos valores cambien.
 
@@ -172,7 +172,7 @@ Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en 
 | Costos Administrativos (CLP\$)                | \$22.424.419.000  |
 | Costo de las Ventas (CLP\$)                   | \$55.126.662.000  |
 
-:Información recopilada [@ParqueArauco2022]
+:Información recopilada [@ParqueArauco2022] {#tbl-rg}
 
 Con esta información, fue posible obtener las ventas anuales, la tasa de incumplimiento y los costos administrativos como porcentaje de las ventas, además del periodo de cuentas por cobrar y los costos variables que se tienen con la política de crédito actual. 
 
@@ -187,7 +187,7 @@ Los resultados se presentan a continuación:
 | Costos Administrativos (% Ventas)   | 9,22%            |
 | Periodo de cuentas por cobrar (Días)| 34,58            |
 | Costos Variables                    | 23%              |
-: Resultados
+: Resultados {#tbl-rg-res}
 
 También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.
 
@@ -198,7 +198,7 @@ En lo que respecta a las diferentes opciones estas difieren en las ventas anuale
 | \$274.725.083.590 | 14,08% | 15,56% | 37 |
 | \$257.706.715.580 | 10,29% | 10,95% | 46 |
 | \$289.312.256.170 | 10,44% | 12,11% | 45 |
-
+:Opciones {#tbl-opciones}
 
 
 Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.
@@ -208,7 +208,7 @@ Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto 
 | 1      | 43.300.724.413,19   |
 | 2      | 38.355.341.091,22   |
 | 3      | 43.791.215.884,26   |
-: Valor presente neto de las diferentes opciones
+: Valor presente neto de las diferentes opciones {#tbl-VP}
 
 De donde se observa que la opción que obtiene el mayor valor es la opción 3, luego esta debería ser la política a adoptar por parte de la empresa. Ahora, en cuanto a los costos de incumplimiento y costos administrativos de la opción 3 y 2, es extraño que si la opción 3 genera más ingresos, esta tenga menores costos asociados. Por lo tanto, aunque los gastos y las ventas no siempre están directamente relacionados, al examinar los detalles, se observa que los gastos de la opción 3 no son inferiores a los de la opción 2. Por consiguiente, la afirmación inicial no parece factible.
 

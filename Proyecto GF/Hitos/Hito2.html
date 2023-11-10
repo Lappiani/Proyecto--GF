@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>hito2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Hito2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Hito2_files/libs/quarto-html/quarto.js"></script>
+<script src="Hito2_files/libs/quarto-html/popper.min.js"></script>
+<script src="Hito2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Hito2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Hito2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Hito2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Hito2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Hito2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Hito2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="aplicación-de-modelos-de-valoración-de-opciones-y-caso-aplicado" class="level1">
+<h1>Aplicación de modelos de valoración de opciones y caso aplicado</h1>
+<section id="comentarios-inciales" class="level2">
+<h2 class="anchored" data-anchor-id="comentarios-inciales">Comentarios inciales</h2>
+<p>Antes de comenzar con las secciones respectivas del hito, es importante mencionar que los códigos relacionados para cada modelo fueron dejados en el <em>jupyter notebook</em> que se encuentra en la carpeta de código. La razón de esto se explicará más adelante.</p>
+</section>
+<section id="sec-Ingesta_datos" class="level2">
+<h2 class="anchored" data-anchor-id="sec-Ingesta_datos">Ingesta de datos</h2>
+<p>Antes de comenzar directamente con los modelos como tal, es importante mencionar que los datos necesarios para utilizar dichos modelos se obtuvieron de la librería de <em>python</em> de <span class="citation" data-cites="YahooFinance">[@YahooFinance]</span>. Esta permite el acceso a datos del mercado de una forma útil y simple, además de que ofrece datos recientes.</p>
+<p>Algunos de los parámetros importantes a obtener son:</p>
+<ul>
+<li><p>La tasa libre de riesgo.</p></li>
+<li><p>El precio del ejercicio y tiempo para el vencimiento de la opción cuyo activo subyacente sea la acción del Banco de Chile.</p></li>
+<li><p>La volatilidad de la acción del Banco de Chile.</p></li>
+</ul>
+<p>Estos se obtuvieron mediante la librería de <em>Yahoo Finance</em> antes mencionada. En lo que respecta a los valores de estos tres parámetros, se utilizaron los que se pueden ver en la siguiente tabla.</p>
+<div id="tbl-params" class="anchored">
+<table class="table">
+<caption>Table&nbsp;1: Valores utilizados para los modelos de valoración</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parámetro</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Tasa libre de riesgo</td>
+<td>4,92%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Precio del ejercicio</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tiempo para el vencimiento (en años)</td>
+<td>0,49</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Es importante mencionar que dado que los datos son extraídos de <em>Yahoo Finance</em> es posible que al correr el código nuevamente estos valores cambien.</p>
+</section>
+<section id="sec-BS" class="level2">
+<h2 class="anchored" data-anchor-id="sec-BS">Aplicación modelo Black y Scholes</h2>
+Antes de comenzar con la valorización de la opción cuyo activo subyacente es la acción del Banco de Chile, se presentarán cuáles son los parámetros que este modelo necesita, y la fórmula respectiva. Los parámetros para el modelo son:
+<p>Luego, la fórmula para el modelo continuo es la siguiente: <span class="math display">\[\begin{equation}
+\label{eq:BS}
+C(S,t) = S\cdot \Phi(d_1) - K\cdot \exp(-R\cdot T) \cdot \Phi(d_{2})\;,
+\end{equation}\]</span> donde, <span class="math display">\[\begin{align*}
+d_1 &amp;= \frac{\log\left(\frac{S}{K}\right) + \left(R + \frac{\sigma^2}{2}\right)\cdot t}{\sqrt{\sigma^2 \cdot t}}\;,\\
+d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
+\end{align*}\]</span> Esta formulación para valuar opciones tiene una serie de supuestos. Estos últimos son condiciones de mercado de carácter ``ideal” para acciones y la opción respectiva <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span>. A continuación se presenta una lista con los supuestos, donde se pone más énfasis al segundo, debido a que este puede ser un tanto complejo de comprender.</p>
+<ol type="a">
+<li><p>La tasa de interés de corto plazo es conocida y constate en el tiempo.</p></li>
+<li><p>El precio de la acción sigue un ``<em>ramdom walk</em>” en tiempo continuo con una tasa de variación proporcional al cuadrado del precio de la acción. Luego, la distribución de posibles precios de acciones al final de cualquier intervalo finito es <em>log-normal</em>. La tasa de variación de los retornos de la acción es constante.</p>
+<ul>
+<li><p>En cuanto al ``<em>random walk</em>”, esto implica que los cambios en el precio de la acción son aleatorias y no pueden ser predecidas con información histórica de la misma.</p></li>
+<li><p>Luego, en cuanto a la proporcionalidad, esto se refiere a que la variabilidad o volatilidad del precio de la acción es constante en el tiempo. Lo cual implica que grandes cambios en el precio son raros, y los cambios pequeños son más comúnes.</p></li>
+<li><p>Después, en lo que respecta a la distribución, esto significa que el logaritmo de del precio de las acciones siguen una distribución normal.</p></li>
+<li><p>Por último, el modelo asume que la tasa a la cual los retornos de la acción varían, se mantiene constante en el tiempo. Por ende, si bien el precio de la acción puede cambiar de forma inesperada, la tasa a la cual suceden estos cambios se mantiene estable.</p></li>
+</ul></li>
+<li><p>La acción no paga dividendos ni ningún otro tipo de distribuciones.</p></li>
+<li><p>La opción es ``Europea”, es decir, solo puede ser ejercida en la fecha de vencimiento.</p></li>
+<li><p>No hay costos de transacción en las compras o ventas de la acción o la opción respectiva.</p></li>
+<li><p>Es posible pedir prestado cualquier fracción del precio de un activo para comprarlo o venderlo, a una tasa de interés de corto plazo.</p></li>
+<li><p>No hay penalizaciones asociadas a realizar una venta en corto. Un vendedor que no es dueño de un activo aceptará el precio del activo de un comprador, y llegará a un acuerdo con el mismo en una fecha futura, pagándole un monto equivalente al precio del activo en esa fecha.</p></li>
+</ol>
+<p>Luego, bajo los supuestos mencionados, el valor de una opción dependerá solamente en el precio de la misma y el tiempo, y en las variables que se toman como constantes dadas <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span>. Para efectos de código, se utilizaron los valores de los parámetros obtenidos en la <a href="#sec-Ingesta_datos">Section&nbsp;1.2</a>. El código como tal no se agregó a este documento, debido a que el largo de ciertas líneas del mismo en algunos casos era tal que no se lograba ver la línea completa, debido a que esta se salía del documento (ver <strong>?@sec-anexo</strong>). Ahora bien, igualmente se presentan los resultados obtenidos, <a href="#tbl-BS">Table&nbsp;2</a>, por medio de este modelo, pero hay que tener en cuenta que debido a que los datos son obtenidos del mercado, es probable que al correr nuevamente el código algunos valores sean distintos.</p>
+<div id="tbl-BS" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2: Resultado aplicación modelo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Precio opción call <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0,136</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modelo-adicional-para-valoración-de-opciones" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-adicional-para-valoración-de-opciones">Modelo adicional para valoración de opciones</h2>
+<p>Existe una gran variedad de modelos además del que se presenta en <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span>. Ahora bien, estos suelen ser bastante complejos en cuanto a la formulación, por lo que se escogió una alternativa más simple en comparación a esto últimos. El modelo adicional que se presentará corresponde al uno que tiene un enfoque basado en el método de simulación de Monte Carlo <span class="citation" data-cites="boyle1977options">[@boyle1977options]</span>.</p>
+<p>Este modelo se utiliza para la valuación de opciones ``Europeas”, al igual que el modelo de Black y Scholes <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span>. Para presentar la metodología y fórmulas asociadas al modelo, primero se mostrarán los parámetros necesarios.</p>
+<ul>
+<li><p><span class="math inline">\(S_t=\)</span> El precio actual de la acción en el tiempo <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(r=\)</span> La tasa libre de riesgo por trimestre compuesta continuamente.</p></li>
+<li><p><span class="math inline">\(\sigma^2=\)</span> varianza trimestral de la acción subyacente, se asume constante.</p></li>
+<li><p><span class="math inline">\(D_t =\)</span> dividendo que se paga en el tiempo <span class="math inline">\(t\)</span>; dividendos pagaderos trimestralmente.</p></li>
+<li><p><span class="math inline">\(E=\)</span> Precio del ejercicio de la opción.</p></li>
+<li><p><span class="math inline">\(T=\)</span> Fecha de vencimiento de la opción.</p></li>
+</ul>
+<p>Además, es importante mencionar que se asume que el tiempo está <strong>medido en trimestres</strong>. También, se asume que <span class="math inline">\(S_t\)</span> representa el precio de la acción justo después del dividendo trimestral <span class="math inline">\(D_t\)</span> haya sido pagado.</p>
+<p>En lo que respecta a la metodología, para comenzar la simulación se genera un valor para <span class="math inline">\(S_{t+1}\)</span>. Si el valor es mayor a <span class="math inline">\(D_{t+1}\)</span> entonces <span class="math inline">\((S_{t+1}-D_{t+1})\)</span> es usado como el valor inicial para el segundo periodo, y el procedimiento continua, hasta llegar a <span class="math inline">\(S_{T}\)</span>. Si en algún momento <span class="math inline">\(S_{t+m}\{m=1,2,\dots ,(T-t-1)\}\)</span> es menor o igual al pago de dividendo correspondiente <span class="math inline">\(D_{t+m}\)</span> el proceso se detiene. En este caso una nueva simulación comienza nuevamente desde el tiempo <span class="math inline">\(t\)</span>. Una serie de experimentos de simulación son llevados a cabo, y el valor esperado de <span class="math inline">\(\max\{S_{T}-E,0\}\)</span> es calculado. El valor es después descontado a una tasa libre de riesgo para calcular una estimación del valor de la opción <span class="math inline">\(\hat{g}\)</span>. Luego se calcula la varianza de la estimación por medio de la siguiente ecuación. <span class="math display">\[\begin{equation}
+\label{eq:sd}
+\hat{s}^{2} = \frac{1}{(n-1)}\sum^{n}_{i=1}\left(g(y_i) - \hat{g}\right)^2\;,
+\end{equation}\]</span> donde, <span class="math display">\[\begin{equation*}
+\hat{g} = \frac{1}{n}\sum^{n}_{i=1}g(y_i)\;,
+\end{equation*}\]</span> con <span class="math inline">\(g(y_i)\)</span> una función arbitraria. Luego, los intervalos de confianza con un 95% de confianza son calculados de la siguiente forma, <span class="math display">\[\begin{equation*}
+\hat{g}\pm 2\frac{\hat{s}}{\sqrt{n}}\;.
+\end{equation*}\]</span> Por último, al igual que en la <a href="#sec-BS">Section&nbsp;1.3</a>, por motivos de formato no se presenta el código. En cuanto al resultado este se puede observar en la <a href="#tbl-Mont">Table&nbsp;3</a>.</p>
+<div id="tbl-Mont" class="anchored">
+<table class="table">
+<caption>Table&nbsp;3: Resultados Monte Carlo</caption>
+<thead>
+<tr class="header">
+<th>Resultado (90% confianza)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(0,067; 0,138)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="análisis-comparativo" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-comparativo">Análisis Comparativo</h2>
+<p>En la siguiente sección se llevará a cabo un análisis de ambos modelos presentados. Primero se contrastan los resultados obtenidos por cada modelo. Los resultados que se obtuvieron fueron los que se puede observar en la siguiente tabla.</p>
+<section id="resultados" class="level3">
+<h3 class="anchored" data-anchor-id="resultados">Resultados</h3>
+<div id="tbl-comp" class="anchored">
+<table class="table">
+<caption>Table&nbsp;4: Análisis comparativo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Método</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Black y Scholes</td>
+<td>0,136</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Monte Carlo</td>
+<td>(0,067; 0,138)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Con respecto a los resultados de ambos métodos, si bien el método de Monte Carlo no entrega un valor como tal, sino que entrega un promedio, su resultado es mejor representado a través de un intervalo de confianza. Es importante notar que el resultado obtenido por medio del modelo de <span class="citation" data-cites="black1973pricing">[@black1973pricing]</span> se encuentra dentro del intervalo de confianza resultante del método <span class="citation" data-cites="boyle1977options">[@boyle1977options]</span>.</p>
+<p>Ahora, la diferencia entre los valores estimados por ambos modelos y el valor real de la opción en el momento que se corrió el código son los que se pueden ver en la <a href="#tbl-R">Table&nbsp;5</a>.</p>
+<div id="tbl-R" class="anchored">
+<table class="table">
+<caption>Table&nbsp;5: Diferencia entre valor estimado y valor real</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Método</th>
+<th>Diferencias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Black y Scholes</td>
+<td>%0,77</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Monte Carlo</td>
+<td>%0,71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En ambos casos se puede observar que las diferencias son muy pequeñas (&lt;1%), pero el método de Monte Carlo particular no debería presentarse como una diferencia entre el valor promedio y el valor real, ya que como son simulaciones se tiene que presentar en forma de intervalo de confianza.De igual forma, el valor real si se encontraba dentro del intervalo de confianza visto en la <a href="#tbl-comp">Table&nbsp;4</a>.</p>
+</section>
+<section id="características" class="level3">
+<h3 class="anchored" data-anchor-id="características">Características</h3>
+<p>Ahora se revisarán diferentes características de los modelos en los que difieren estos últimos. Primero, el modelo de Black y Scholes entrega una solución analítica para la valoración de opciones. Tiene una ecuación que calcula directamente el precio de la opción. El modelo se construye en base a múltiples supuestos, dentro de los cuales se encuentran volatilidad constante y una tasa libre de riesgo. Por otro lado, el enfoque de Monte Carlo es un método numérico. Tal como se mencionó, utiliza el muestreo aleatorio para estimar los precio de opciones. Este método no provee una formula directa, utiliza múltiples simulaciones para estimar el precio de una opción.</p>
+<p>Segundo, el modelo de Black y Scholes hace supuestos que simplifican el modelo, dentro de los cuales están volatilidad constante, una tasa libre de riesgo y una distribución de los retornos <em>Log-normal</em>. Estas últimas no se cumplen siempre en algunos escenarios. El enfoque de Monte Carlo se puede acomodar a supuestos más realísticos y complejos. Un ejemplo de esto último puede ser niveles de volatilidad que varían o tasas de interés, lo cual hace que el modelo se adapte a una mayor variedad de situaciones.</p>
+<p>Tercero, debido a la mayor capacidad de adaptación del enfoque de Monte Carlo ya mencionado, esto lo hace más preciso. No así el modelo de Black y Scholes, ya que como se mencionó, depende de múltiples supuestos.</p>
+<p>Finalmente, en cuanto al costo computacional, si la cantidad de simulaciones es muy grande, el enfoque de Monte Carlo puede llegar a ser costoso computacionalmente. Por otro lado, el modelo de Black y Scholes, como es una ecuación, provee resultados más rápido ya que no requiere realizar múltiples repeticiones.</p>
+</section>
+</section>
+<section id="reporte-grupal-caso-adminstración" class="level2">
+<h2 class="anchored" data-anchor-id="reporte-grupal-caso-adminstración">Reporte Grupal: Caso Adminstración</h2>
+<p>Se eligen uno de los siguientes casos con tal de replicar y responder sus preguntas de acuerdo al activo principal elegido: Caso Administración de Capital de Trabajo de Keafer Manufacturing de la página 822 del ROSS. Caso Administración de Efectivo de Richmond Corporation de la página 845 del ROSS. Caso Administración de Efectivo de Braam Industries de la página 874 del ROSS. En este caso, el grupo eligió el Caso Administración de Efectivo de Braam Industries, donde se debe examinar la política de crédito de la compañía para ver si una política diferente podría contribuir a aumentar la rentabilidad. En ese caso, una vez determinada la política de crédito actual, se proponen 3 opciones para cambiar esta política, y se debe determinar cuál es la mejor alternativa y determinar inconsistencias.</p>
+<p>Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en los E.E.F.F. de la compañía para el año 2022 <span class="citation" data-cites="ParqueArauco2022">[@ParqueArauco2022]</span> toda la información necesaria para poder resolver el caso, tales como los ingresos por ventas, el monto en cuentas por cobrar, los costos administrativos, los costos variables de la operación, etc. La información encontrada fue la siguiente:</p>
+<div id="tbl-rg" class="anchored">
+<table class="table">
+<caption>Table&nbsp;6: Información recopilada <span class="citation" data-cites="ParqueArauco2022">[@ParqueArauco2022]</span></caption>
+<thead>
+<tr class="header">
+<th>Ítem</th>
+<th style="text-align: right;">Monto</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ingresos por Ventas Anuales</td>
+<td style="text-align: right;">$243.119.543.000</td>
+</tr>
+<tr class="even">
+<td>Monto Neto de Deudores por venta 2022 (CLP$)</td>
+<td style="text-align: right;">$22.420.967.000</td>
+</tr>
+<tr class="odd">
+<td>Monto Neto de Deudores por venta 2021 (CLP$)</td>
+<td style="text-align: right;">$23.653.332.000</td>
+</tr>
+<tr class="even">
+<td>Costos Administrativos (CLP$)</td>
+<td style="text-align: right;">$22.424.419.000</td>
+</tr>
+<tr class="odd">
+<td>Costo de las Ventas (CLP$)</td>
+<td style="text-align: right;">$55.126.662.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Con esta información, fue posible obtener las ventas anuales, la tasa de incumplimiento y los costos administrativos como porcentaje de las ventas, además del periodo de cuentas por cobrar y los costos variables que se tienen con la política de crédito actual.</p>
+<p>La tasa de incumplimiento como porcentaje de las ventas corresponde a la división entre el Monto Neto de Deudores por Venta para el año 2022 y las Ventas Anuales. Los costos administrativos como porcentaje de las ventas corresponden a la división entre los Costos Administrativos y las Ventas Anuales. El periodo de cuentas por cobrar corresponde a la división entre el promedio del Monto Neto de Deudores inicial y final, con las Ventas Anuales, y todo eso dividido por 365 para obtener la cantidad de días. Por último, los costos variables como porcentaje corresponden a la división entre los Costos de las Ventas y las Ventas Anuales.</p>
+<p>Los resultados se presentan a continuación:</p>
+<div id="tbl-rg-res" class="anchored">
+<table class="table">
+<caption>Table&nbsp;7: Resultados</caption>
+<thead>
+<tr class="header">
+<th>Concepto</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ventas Anuales (CLP)</td>
+<td style="text-align: right;">$243.119.543.000</td>
+</tr>
+<tr class="even">
+<td>Tasa de Incumplimiento (% Ventas)</td>
+<td style="text-align: right;">9,22%</td>
+</tr>
+<tr class="odd">
+<td>Costos Administrativos (% Ventas)</td>
+<td style="text-align: right;">9,22%</td>
+</tr>
+<tr class="even">
+<td>Periodo de cuentas por cobrar (Días)</td>
+<td style="text-align: right;">34,58</td>
+</tr>
+<tr class="odd">
+<td>Costos Variables</td>
+<td style="text-align: right;">23%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>También, es importante señalar que para los cálculos que vienen a continuación, se utilizó la tasa de interés promedio de aquel periodo, correspondiente a un 8,375%.</p>
+<p>En lo que respecta a las diferentes opciones estas difieren en las ventas anuales, tasa de incumplimiento, costos administrativos y periodo de cuentas por cobrar. Estas se presentan en</p>
+<div id="tbl-opciones" class="anchored">
+<table class="table">
+<caption>Table&nbsp;8: Opciones</caption>
+<colgroup>
+<col style="width: 17%">
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Opciones</th>
+<th style="text-align: center;">Ventas Anuales (CLP)</th>
+<th style="text-align: center;">Tasa de Incumplimiento (% Ventas)</th>
+<th style="text-align: center;">Costos Administrativos (% Ventas)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">$274.725.083.590</td>
+<td style="text-align: center;">14,08%</td>
+<td style="text-align: center;">15,56%</td>
+<td style="text-align: center;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">$257.706.715.580</td>
+<td style="text-align: center;">10,29%</td>
+<td style="text-align: center;">10,95%</td>
+<td style="text-align: center;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">$289.312.256.170</td>
+<td style="text-align: center;">10,44%</td>
+<td style="text-align: center;">12,11%</td>
+<td style="text-align: center;">45</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Luego, para evaluar cada opción se realiza el cálculo del Valor Presente Neto de cada una. De esta forma, se escoge la opción la cuál obtiene un VPN más alto, en comparación a las demás. Los resultados fueron los que se presentan a continuación.</p>
+<div id="tbl-VP" class="anchored">
+<table class="table">
+<caption>Table&nbsp;9: Valor presente neto de las diferentes opciones</caption>
+<thead>
+<tr class="header">
+<th>Opción</th>
+<th style="text-align: right;">VPN (CLP)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td style="text-align: right;">43.300.724.413,19</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td style="text-align: right;">38.355.341.091,22</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td style="text-align: right;">43.791.215.884,26</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>De donde se observa que la opción que obtiene el mayor valor es la opción 3, luego esta debería ser la política a adoptar por parte de la empresa. Ahora, en cuanto a los costos de incumplimiento y costos administrativos de la opción 3 y 2, es extraño que si la opción 3 genera más ingresos, esta tenga menores costos asociados. Por lo tanto, aunque los gastos y las ventas no siempre están directamente relacionados, al examinar los detalles, se observa que los gastos de la opción 3 no son inferiores a los de la opción 2. Por consiguiente, la afirmación inicial no parece factible.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -53,7 +53,7 @@ plt.show()
 | Año actual (YTD) | 14.04%       |
 | Año anterior     | 32.21%       |
 
-: Valores hasta la fecha 27-09-2023 [@BolsadeSantiago2023]
+: Valores hasta la fecha 27-09-2023 [@BolsadeSantiago2023] {#tbl-returns}
 
 ## Motivación
 
@@ -224,7 +224,7 @@ Con todo esto, fue posible obtener la información de los retornos, definir el g
 |Banco de Chile |68.3%|
 |Parque Arauco  |10.3%|
 |COPEC          |21.4%|
-:Composición del portafolio
+:Composición del portafolio {#tbl-portafolio}
 
 Cuyo rendimiento esperado es de 1.113%.
 

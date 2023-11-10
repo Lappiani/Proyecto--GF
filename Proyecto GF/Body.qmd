@@ -2,7 +2,7 @@
 title: "Proyecto Gestión Financiera"
 author: "Luca Appiani (Grupo 13)"
 format: 
-  pdf:
+  html:
     code-block-border-left: true
     code-overflow: wrap
 date: today
