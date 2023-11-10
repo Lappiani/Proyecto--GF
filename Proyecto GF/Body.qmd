@@ -13,7 +13,7 @@ number-sections: true
 warning: false
 crossref: 
   chapters: true
-toc: false
+toc: true
 ---
 
 {{< include Hitos/Hito1.qmd >}}

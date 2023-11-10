@@ -1,33 +1,35 @@
+
+# Load necessary libraries
 library(shiny)
 library(quantmod)
-library(plotly)
 
-shinyUI(fluidPage(
-  titlePanel("Stock Price Viewer"),
+# Define UI
+ui <- fluidPage(
+  titlePanel("Resumen Proyecto Grupo 13"),
+  h2("Note:"),
+  p("This is a simple Shiny app for plotting stock prices. Please enter a valid stock symbol and click 'Plot'."),
   sidebarLayout(
     sidebarPanel(
-      textInput("ticker", "Enter Stock Ticker (e.g., AAPL):"),
-      dateRangeInput("dateRange", "Date Range:", start = "2020-01-01", end = "2022-12-31"),
-      actionButton("plotButton", "Plot Stock Price")
+      textInput("symbol", "Enter Stock Symbol:", value = "AAPL"),
+      actionButton("plot", "Plot")
     ),
     mainPanel(
-      plotlyOutput("stockPlot")
+      plotOutput("pricePlot")
     )
   )
-))
+)
 
-shinyServer(function(input, output) {
-  observeEvent(input$plotButton, {
-    tryCatch({
-      # Get the stock price data
-      stock_data <- getSymbols(input$ticker, from = input$dateRange[1], to = input$dateRange[2], auto.assign = FALSE)
-      
-      # Create a plot using Plotly
-      output$stockPlot <- renderPlotly({
-        plot_ly(data = stock_data, x = index(stock_data), y = stock_data[, "Close"], type = 'scatter', mode = 'lines', name = 'Stock Price')
-      })
-    }, error = function(e) {
-      showNotification("Error: Unable to fetch stock data. Please check the stock ticker symbol.", type = "error")
+# Define server logic
+server <- function(input, output) {
+  observeEvent(input$plot, {
+    symbol <- input$symbol
+    data <- getSymbols(symbol, src = "yahoo", auto.assign = FALSE)
+    output$pricePlot <- renderPlot({
+      chartSeries(data, theme = chartTheme("white"), name = paste("Stock Prices for", symbol))
+      title(ylab = "Price (in market currency)")
     })
   })
-})
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
