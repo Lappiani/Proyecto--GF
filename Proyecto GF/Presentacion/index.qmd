@@ -13,6 +13,7 @@ author:
   - Gerardo Rozas
 toc: true
 lang: es
+footer: "Grupo 13"
 ---
 
 

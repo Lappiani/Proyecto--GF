@@ -8,7 +8,7 @@ lang: es
 css: style.css
 ---
 
-# Descripción Activo y Contexto (Hito 1)
+# Descripción Activo y Contexto
 
 ## Definición
 
@@ -140,7 +140,7 @@ En este se puede apreciar la evolución del índice DEPUC en Chile entre los añ
 
 ## Análisis de Largo Plazo
 
-### Caracterización deuda (Aplicación cap. 15)
+### Caracterización deuda
 
 En lo que respecta a **acciones comunes** para el caso del Banco de Chile se tiene la acción del mismo que se mencionó con anterioridad en la sección de definición. Particularmente, de acuerdo con [@BancoChile2023], las acciones del Banco de Chile se dividen en:
 
@@ -161,7 +161,7 @@ En lo que respecta a bonos, según [@BancoDeChile2023] la entidad realizó una e
 
 Normalmente, este tipo de bonos suelen tener métricas asociadas cuyo cumplimiento afecta directamente la tasa del bono. Por lo que, se pueden clasificar de cierta forma como bonos de tasa flotante.
 
-### Caracterización de emisiones históricas (Aplicación cap. 20)
+### Caracterización de emisiones históricas
 
 En lo que respecta a emisiones históricas, el 4 de mayo del año 2011 el Banco de Chile realizó un aumento de capital donde se subastaron 1.398.023.524 acciones de un accionista controlador. Estas acciones fueron ofrecidas a los accionistas del banco y a la Sociedad Matriz del Banco de Chile. Debido a que se ofrecieron a los accionistas del Banco, esta se puede categorizar como una **oferta directa de derechos de suscripción**.
 

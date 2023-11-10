@@ -1,4 +1,4 @@
-# Aplicación de modelos de valoración de opciones y caso aplicado (Hito 2)
+# Aplicación de modelos de valoración de opciones y caso aplicado
 
 ## Comentarios inciales
 Antes de comenzar con las secciones respectivas del hito, es importante mencionar que los códigos relacionados para cada modelo fueron dejados en el *jupyter notebook* que se encuentra en la carpeta de código. La razón de esto se explicará más adelante.
