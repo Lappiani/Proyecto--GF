@@ -4,6 +4,7 @@ library(shiny)
 library(quantmod)
 library(ggplot2)
 library(dplyr)
+library(rsconnect)
 
 # Define UI
 ui <- fluidPage(
