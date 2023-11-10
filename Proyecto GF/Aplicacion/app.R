@@ -1,10 +1,11 @@
-
 # Load necessary libraries
 library(shiny)
 library(quantmod)
 library(ggplot2)
 library(dplyr)
 library(rsconnect)
+library(PerformanceAnalytics)
+library(DT)
 
 # Define UI
 ui <- fluidPage(
@@ -18,10 +19,12 @@ ui <- fluidPage(
       actionButton("plot", "Plot")
     ),
     mainPanel(
-      tabsetPanel(
+      navlistPanel(
+        # Added the "Returns" tab
         tabPanel("Price", plotOutput("pricePlot")),
         tabPanel("Volume", plotOutput("volumePlot")),
-        tabPanel("Options", plotOutput("optionsPlot"))
+        tabPanel("Options", plotOutput("optionsPlot")),
+        tabPanel("Returns", DT::dataTableOutput("returnsTable"))
       )
     )
   )
@@ -34,6 +37,30 @@ server <- function(input, output) {
     start_date <- input$dates[1]
     end_date <- input$dates[2]
     data <- getSymbols(symbol, src = "yahoo", from = start_date, to = end_date, auto.assign = FALSE)
+    
+    # Calculate the returns
+    returns <- dailyReturn(data)
+    monthly_return <- tail(monthlyReturn(data), 1)
+    ytd_return <- Return.cumulative(returns[index(returns) >= as.Date(paste0(format(Sys.Date(), "%Y"), "-01-01"))])
+    
+    # Create a datatable object
+    returns_table <- DT::datatable(
+      data.frame(
+        "Monthly Return" = monthly_return*100,
+        "YTD Return" = ytd_return*100
+      ),
+      rownames = FALSE,
+      colnames = c("Monthly Return (%)", "YTD Return (%)")
+    )
+    
+    
+    # Set the page layout option
+    returns_table <- returns_table
+    
+    # Render the datatable object
+    output$returnsTable <- renderDT(returns_table)
+    
+    # Render the plots
     output$pricePlot <- renderPlot({
       chartSeries(data, theme = chartTheme("white"), name = paste("Stock Prices for", symbol))
       title(ylab = "Price (in market currency)")
@@ -52,8 +79,9 @@ server <- function(input, output) {
         geom_point() +
         labs(title = paste("Options Strike Prices for", symbol), x = "Strike Price", y = "Last Price")
     })
+    
   })
 }
 
-# Run the application 
+# Run the application
 shinyApp(ui = ui, server = server)
