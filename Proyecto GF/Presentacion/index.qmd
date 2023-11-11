@@ -11,6 +11,7 @@ author:
   - Luca Appiani
   - Antonia Banduc
   - Gerardo Rozas
+
 lang: es
 footer: "Grupo 13"
 bibliography: refs_p.bib
@@ -53,9 +54,9 @@ El Banco de Chile es uno de los bancos comerciales más grandes de Chile. Ofrece
 ## Portafolio elegido
 Las variables son las siguientes:
 
-- $\mu$: retornos esperados.
-- $\mathbf{w}:$ pesos relativos del portafolio.
-- $\mathbf{\Sigma}:$ matriz de covarianza de los activos que componen el portafolio.
+- $\boldsymbol{\mu}$: retornos esperados.
+- $\boldsymbol{w}:$ pesos relativos del portafolio.
+- $\boldsymbol{\Sigma}:$ matriz de covarianza de los activos que componen el portafolio.
 - $\delta$: factor de penalización.
 
 ::: {.notes}
@@ -66,7 +67,7 @@ A mayor valor del $\delta$, más se penaliza la FO en función al riesgo, y vice
 
 El modelo busca maximizar el ratio de *Sharpe*.
 $$
-\max_{\mathbf{w}} \left\{\mu - \delta \mathbf{w}^{\intercal}\mathbf{\Sigma}\mathbf{w}\right\}
+\max_{\boldsymbol{w}} \left\{\boldsymbol{\mu} - \delta \boldsymbol{w}^{\intercal}\boldsymbol{\Sigma}\boldsymbol{w}\right\}
 $$
 Sujeto a:
 

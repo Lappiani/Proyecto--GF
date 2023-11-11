@@ -437,9 +437,9 @@ Gerardo Rozas
 <h2>Portafolio elegido</h2>
 <p>Las variables son las siguientes:</p>
 <ul>
-<li><span class="math inline">\(\mu\)</span>: retornos esperados.</li>
-<li><span class="math inline">\(\mathbf{w}:\)</span> pesos relativos del portafolio.</li>
-<li><span class="math inline">\(\mathbf{\Sigma}:\)</span> matriz de covarianza de los activos que componen el portafolio.</li>
+<li><span class="math inline">\(\boldsymbol{\mu}\)</span>: retornos esperados.</li>
+<li><span class="math inline">\(\boldsymbol{w}:\)</span> pesos relativos del portafolio.</li>
+<li><span class="math inline">\(\boldsymbol{\Sigma}:\)</span> matriz de covarianza de los activos que componen el portafolio.</li>
 <li><span class="math inline">\(\delta\)</span>: factor de penalización.</li>
 </ul>
 <aside class="notes">
@@ -459,7 +459,7 @@ Gerardo Rozas
 <section class="slide level2">
 
 <p>El modelo busca maximizar el ratio de <em>Sharpe</em>. <span class="math display">\[
-\max_{\mathbf{w}} \left\{\mu - \delta \mathbf{w}^{\intercal}\mathbf{\Sigma}\mathbf{w}\right\}
+\max_{\boldsymbol{w}} \left\{\boldsymbol{\mu} - \delta \boldsymbol{w}^{\intercal}\boldsymbol{\Sigma}\boldsymbol{w}\right\}
 \]</span> Sujeto a:</p>
 <p><span class="math display">\[\begin{align}
   \sum_{i}&amp;w_{i}=1\\

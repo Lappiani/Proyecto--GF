@@ -202,10 +202,10 @@ Un detalle a considerar es que las opciones que se mencionaron se transan en la 
 
 ## Reporte grupal
 
-Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados ${\mu}$ y la matriz de covarianza de los activos que componen el portafolio ${\Sigma}$, se calcularon los pesos $\mathbf{w}$ de cada activo. El problema de optimización a maximizar fue el siguiente:
+Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados $\boldsymbol{\mu}$ y la matriz de covarianza de los activos que componen el portafolio $\boldsymbol{\Sigma}$, se calcularon los pesos $\boldsymbol{w}$ de cada activo. El problema de optimización a maximizar fue el siguiente:
 
 $$
-\max_{\mathbf{w}} \left\{{\mu} - \delta \mathbf{w}^{\intercal}{\Sigma}\mathbf{w} \right\}
+\max_{\boldsymbol{w}} \left\{\boldsymbol{\mu} - \delta \boldsymbol{w}^{\intercal}\boldsymbol{\Sigma}\boldsymbol{w} \right\}
 $$
 Sujeto a:
 \begin{align}
@@ -219,11 +219,11 @@ En este caso, se decidió tomar un perfil de inversión conservador, dada la rec
 
 Con todo esto, fue posible obtener la información de los retornos, definir el grado del factor de penalización y maximizar los retornos en función del riesgo asumido. Así, los resultados de los pesos de cada activo en el portafolio fueron los siguientes:
 
-|Acción         |Pesos|
-|:--------------|-----|
-|Banco de Chile |68.3%|
-|Parque Arauco  |10.3%|
-|COPEC          |21.4%|
+|Acción         |Pesos |
+|:--------------|:-----|
+|Banco de Chile |68.3% |
+|Parque Arauco  |10.3% |
+|COPEC          |21.4% |
 :Composición del portafolio {#tbl-portafolio}
 
 Cuyo rendimiento esperado es de 1.113%.

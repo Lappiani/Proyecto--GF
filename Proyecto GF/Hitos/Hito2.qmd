@@ -127,7 +127,7 @@ En la siguiente sección se llevará a cabo un análisis de ambos modelos presen
 ### Resultados
 
 |Método         | Resultado    |
-|:--------------|--------------|
+|---------------|--------------|
 |Black y Scholes|0,136         |
 |Monte Carlo    |(0,067; 0,138)|
 :Análisis comparativo {#tbl-comp}
@@ -137,9 +137,9 @@ Con respecto a los resultados de ambos métodos, si bien el método de Monte Car
 Ahora, la diferencia entre los valores estimados por ambos modelos y el valor real de la opción en el momento que se corrió el código son los que se pueden ver en la @tbl-R.
 
 |Método         | Diferencias  |
-|:--------------|--------------|
-|Black y Scholes|%0,77         |
-|Monte Carlo    |%0,71         |
+|---------------|--------------|
+|Black y Scholes|0,77%         |
+|Monte Carlo    |0,71%         |
 :Diferencia entre valor estimado y valor real {#tbl-R}
 
 En ambos casos se puede observar que las diferencias son muy pequeñas (<1%), pero el método de Monte Carlo particular no debería presentarse como una diferencia entre el valor promedio y el valor real, ya que como son simulaciones se tiene que presentar en forma de intervalo de confianza.De igual forma, el valor real si se encontraba dentro del intervalo de confianza visto en la @tbl-comp.
@@ -165,7 +165,7 @@ En este caso, el grupo eligió el Caso Administración de Efectivo de Braam Indu
 Este caso se replicó para la compañía Parque Arauco. Para esto, se buscó en los E.E.F.F. de la compañía para el año 2022 [@ParqueArauco2022] toda la información necesaria para poder resolver el caso, tales como los ingresos por ventas, el monto en cuentas por cobrar, los costos administrativos, los costos variables de la operación, etc. La información encontrada fue la siguiente:
 
 | Ítem                                          |Monto              |
-|-----------------------------------------------|------------------:|
+|-----------------------------------------------|-------------------|
 | Ingresos por Ventas Anuales                   | \$243.119.543.000 |
 | Monto Neto de Deudores por venta 2022 (CLP\$) | \$22.420.967.000  |
 | Monto Neto de Deudores por venta 2021 (CLP\$) | \$23.653.332.000  |
@@ -181,7 +181,7 @@ La tasa de incumplimiento como porcentaje de las ventas corresponde a la divisi�
 Los resultados se presentan a continuación:
 
 | Concepto                            | Valor            |
-|-------------------------------------|-----------------:|
+|-------------------------------------|-----------------|
 | Ventas Anuales (CLP)                | \$243.119.543.000|
 | Tasa de Incumplimiento (% Ventas)   | 9,22%            |
 | Costos Administrativos (% Ventas)   | 9,22%            |

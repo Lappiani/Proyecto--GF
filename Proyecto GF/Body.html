@@ -318,9 +318,9 @@ div.csl-indent {
 </section>
 <section id="reporte-grupal" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="reporte-grupal"><span class="header-section-number">1.5</span> Reporte grupal</h2>
-<p>Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados <span class="math inline">\({\mu}\)</span> y la matriz de covarianza de los activos que componen el portafolio <span class="math inline">\({\Sigma}\)</span>, se calcularon los pesos <span class="math inline">\(\mathbf{w}\)</span> de cada activo. El problema de optimización a maximizar fue el siguiente:</p>
+<p>Para la determinación de los pesos del portafolio compuesto por las acciones del grupo, se buscó calcular el portafolio tangencial. Entonces, con los retornos esperados <span class="math inline">\(\boldsymbol{\mu}\)</span> y la matriz de covarianza de los activos que componen el portafolio <span class="math inline">\(\boldsymbol{\Sigma}\)</span>, se calcularon los pesos <span class="math inline">\(\boldsymbol{w}\)</span> de cada activo. El problema de optimización a maximizar fue el siguiente:</p>
 <p><span class="math display">\[
-\max_{\mathbf{w}} \left\{{\mu} - \delta \mathbf{w}^{\intercal}{\Sigma}\mathbf{w} \right\}
+\max_{\boldsymbol{w}} \left\{\boldsymbol{\mu} - \delta \boldsymbol{w}^{\intercal}\boldsymbol{\Sigma}\boldsymbol{w} \right\}
 \]</span> Sujeto a: <span class="math display">\[\begin{align}
 &amp;\sum_{i} w_{i} = 1 &amp;\\
 &amp;0\leq w_{i}\leq 1 &amp;
@@ -334,21 +334,21 @@ div.csl-indent {
 <thead>
 <tr class="header">
 <th style="text-align: left;">Acción</th>
-<th>Pesos</th>
+<th style="text-align: left;">Pesos</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Banco de Chile</td>
-<td>68.3%</td>
+<td style="text-align: left;">68.3%</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Parque Arauco</td>
-<td>10.3%</td>
+<td style="text-align: left;">10.3%</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">COPEC</td>
-<td>21.4%</td>
+<td style="text-align: left;">21.4%</td>
 </tr>
 </tbody>
 </table>
@@ -488,17 +488,17 @@ d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
 <caption>Tabla&nbsp;2.4: Análisis comparativo</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Método</th>
+<th>Método</th>
 <th>Resultado</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Black y Scholes</td>
+<td>Black y Scholes</td>
 <td>0,136</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Monte Carlo</td>
+<td>Monte Carlo</td>
 <td>(0,067; 0,138)</td>
 </tr>
 </tbody>
@@ -511,17 +511,17 @@ d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
 <caption>Tabla&nbsp;2.5: Diferencia entre valor estimado y valor real</caption>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Método</th>
+<th>Método</th>
 <th>Diferencias</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Black y Scholes</td>
+<td>Black y Scholes</td>
 <td>%0,77</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Monte Carlo</td>
+<td>Monte Carlo</td>
 <td>%0,71</td>
 </tr>
 </tbody>
@@ -547,29 +547,29 @@ d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
 <thead>
 <tr class="header">
 <th>Ítem</th>
-<th style="text-align: right;">Monto</th>
+<th>Monto</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Ingresos por Ventas Anuales</td>
-<td style="text-align: right;">$243.119.543.000</td>
+<td>$243.119.543.000</td>
 </tr>
 <tr class="even">
 <td>Monto Neto de Deudores por venta 2022 (CLP$)</td>
-<td style="text-align: right;">$22.420.967.000</td>
+<td>$22.420.967.000</td>
 </tr>
 <tr class="odd">
 <td>Monto Neto de Deudores por venta 2021 (CLP$)</td>
-<td style="text-align: right;">$23.653.332.000</td>
+<td>$23.653.332.000</td>
 </tr>
 <tr class="even">
 <td>Costos Administrativos (CLP$)</td>
-<td style="text-align: right;">$22.424.419.000</td>
+<td>$22.424.419.000</td>
 </tr>
 <tr class="odd">
 <td>Costo de las Ventas (CLP$)</td>
-<td style="text-align: right;">$55.126.662.000</td>
+<td>$55.126.662.000</td>
 </tr>
 </tbody>
 </table>
@@ -583,29 +583,29 @@ d_2 &amp;= d_1 - \sqrt{\sigma^2 \cdot t}\;.
 <thead>
 <tr class="header">
 <th>Concepto</th>
-<th style="text-align: right;">Valor</th>
+<th>Valor</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Ventas Anuales (CLP)</td>
-<td style="text-align: right;">$243.119.543.000</td>
+<td>$243.119.543.000</td>
 </tr>
 <tr class="even">
 <td>Tasa de Incumplimiento (% Ventas)</td>
-<td style="text-align: right;">9,22%</td>
+<td>9,22%</td>
 </tr>
 <tr class="odd">
 <td>Costos Administrativos (% Ventas)</td>
-<td style="text-align: right;">9,22%</td>
+<td>9,22%</td>
 </tr>
 <tr class="even">
 <td>Periodo de cuentas por cobrar (Días)</td>
-<td style="text-align: right;">34,58</td>
+<td>34,58</td>
 </tr>
 <tr class="odd">
 <td>Costos Variables</td>
-<td style="text-align: right;">23%</td>
+<td>23%</td>
 </tr>
 </tbody>
 </table>
