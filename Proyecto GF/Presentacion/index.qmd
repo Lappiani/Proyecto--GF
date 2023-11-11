@@ -11,13 +11,20 @@ author:
   - Luca Appiani
   - Antonia Banduc
   - Gerardo Rozas
-toc: true
 lang: es
 footer: "Grupo 13"
+bibliography: refs_p.bib
 ---
+## Contenidos
 
+- [Descripción de los activos](#desc-activos)
+- [Caracterización de la deuda]()
+- [Derivados de un activo]()
+- [Modelo alternativo]()
+- [Portafolio elegido]()
+- [Conclusión resultados]()
 
-# Selección de activos
+## Descripción de los activos {#desc-activos}
 
 Los activos desarrollados en esa ocasión fueron los siguientes.
 
@@ -27,8 +34,73 @@ Los activos desarrollados en esa ocasión fueron los siguientes.
 |Parque Arauco |PARAUCO.SN |
 |COPEC         |COPEC.SN   |
 
+Donde los tickers corresponden a los de la Bolsa de Santiago [@bolsadesantiago].
+
 ## Banco de Chile
 
 - Uno de los bancos comerciales más grandes del país.
 - Ofrece una gran variedad de productos bancarios y servicios financieros.
-- Cuyo **objetivo** es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.
+- Cuentas de ahorro o de inversión.
+- Cuyo **objetivo** de las soluciones financieras es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.
+
+::: {.notes}
+El Banco de Chile es uno de los bancos comerciales más grandes de Chile. Ofrecen una gran variedad de productos bancarios y servicios financieros, dentro de los cuales está la oportunidad de abrir cuentas para el propósito que necesiten, ya sea de ahorro o de inversión. 
+:::
+## Parque Arauco
+
+## COPEC
+
+## Portafolio elegido
+Las variables son las siguientes:
+
+- $\mu$: retornos esperados.
+- $\mathbf{w}:$ pesos relativos del portafolio.
+- $\mathbf{\Sigma}:$ matriz de covarianza de los activos que componen el portafolio.
+- $\delta$: factor de penalización.
+
+::: {.notes}
+A mayor valor del $\delta$, más se penaliza la FO en función al riesgo, y viceversa.
+:::
+
+---
+
+El modelo busca maximizar el ratio de *Sharpe*.
+$$
+\max_{\mathbf{w}} \left\{\mu - \delta \mathbf{w}^{\intercal}\mathbf{\Sigma}\mathbf{w}\right\}
+$$
+Sujeto a:
+
+\begin{align}
+  \sum_{i}&w_{i}=1\\
+  0\leq &w_{i}\leq 1
+\end{align}
+
+
+::: {.notes}
+Restricciones son:
+
+- Suma de los pesos equivalente a 1.
+- No se permiten ventas cortas ni apalancadas.
+
+:::
+
+---
+
+Resultados del portafolio:
+
+|Acción         |Pesos|
+|:--------------|-----|
+|Banco de Chile |68.3%|
+|Parque Arauco  |10.3%|
+|COPEC          |21.4%|
+
+
+---
+
+
+
+
+## Referencias
+
+:::{#refs}
+:::

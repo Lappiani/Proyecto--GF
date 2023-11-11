@@ -31,7 +31,26 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -347,20 +366,20 @@ Gerardo Rozas
 </div>
 </div>
 
-</section><section id="TOC">
-<nav role="doc-toc"> 
-<h2 id="toc-title">Tabla de contenidos</h2>
-<ul>
-<li><a href="#/selección-de-activos" id="/toc-selección-de-activos">Selección de activos</a>
-<ul>
-<li><a href="#/banco-de-chile" id="/toc-banco-de-chile">Banco de Chile</a></li>
-</ul></li>
-</ul>
-</nav>
 </section>
-<section>
-<section id="selección-de-activos" class="title-slide slide level1 center">
-<h1>Selección de activos</h1>
+<section id="contenidos" class="slide level2">
+<h2>Contenidos</h2>
+<ul>
+<li><a href="#/desc-activos">Descripción de los activos</a></li>
+<li><a href="">Caracterización de la deuda</a></li>
+<li><a href="">Derivados de un activo</a></li>
+<li><a href="">Modelo alternativo</a></li>
+<li><a href="">Portafolio elegido</a></li>
+<li><a href="">Conclusión resultados</a></li>
+</ul>
+</section>
+<section id="desc-activos" class="slide level2">
+<h2>Descripción de los activos</h2>
 <p>Los activos desarrollados en esa ocasión fueron los siguientes.</p>
 <table>
 <thead>
@@ -384,18 +403,123 @@ Gerardo Rozas
 </tr>
 </tbody>
 </table>
+<p>Donde los tickers corresponden a los de la Bolsa de Santiago <span class="citation" data-cites="bolsadesantiago">(<a href="#/referencias" role="doc-biblioref" onclick="">Santiago, s.&nbsp;f.</a>)</span>.</p>
 </section>
 <section id="banco-de-chile" class="slide level2">
 <h2>Banco de Chile</h2>
 <ul>
 <li>Uno de los bancos comerciales más grandes del país.</li>
 <li>Ofrece una gran variedad de productos bancarios y servicios financieros.</li>
-<li>Cuyo <strong>objetivo</strong> es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.</li>
+<li>Cuentas de ahorro o de inversión.</li>
+<li>Cuyo <strong>objetivo</strong> de las soluciones financieras es lograr satisfacer las necesidades de los clientes en cualquier etapa de la vida de estos.</li>
 </ul>
+<aside class="notes">
+<p>El Banco de Chile es uno de los bancos comerciales más grandes de Chile. Ofrecen una gran variedad de productos bancarios y servicios financieros, dentro de los cuales está la oportunidad de abrir cuentas para el propósito que necesiten, ya sea de ahorro o de inversión.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="parque-arauco" class="slide level2">
+<h2>Parque Arauco</h2>
+</section>
+<section id="copec" class="slide level2">
+<h2>COPEC</h2>
+</section>
+<section id="portafolio-elegido" class="slide level2">
+<h2>Portafolio elegido</h2>
+<p>Las variables son las siguientes:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: retornos esperados.</li>
+<li><span class="math inline">\(\mathbf{w}:\)</span> pesos relativos del portafolio.</li>
+<li><span class="math inline">\(\mathbf{\Sigma}:\)</span> matriz de covarianza de los activos que componen el portafolio.</li>
+<li><span class="math inline">\(\delta\)</span>: factor de penalización.</li>
+</ul>
+<aside class="notes">
+<p>A mayor valor del <span class="math inline">\(\delta\)</span>, más se penaliza la FO en función al riesgo, y viceversa.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>El modelo busca maximizar el ratio de <em>Sharpe</em>. <span class="math display">\[
+\max_{\mathbf{w}} \left\{\mu - \delta \mathbf{w}^{\intercal}\mathbf{\Sigma}\mathbf{w}\right\}
+\]</span> Sujeto a:</p>
+<p><span class="math display">\[\begin{align}
+  \sum_{i}&amp;w_{i}=1\\
+  0\leq &amp;w_{i}\leq 1
+\end{align}\]</span></p>
+<aside class="notes">
+<p>Restricciones son:</p>
+<ul>
+<li>Suma de los pesos equivalente a 1.</li>
+<li>No se permiten ventas cortas ni apalancadas.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>Resultados del portafolio:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Acción</th>
+<th>Pesos</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Banco de Chile</td>
+<td>68.3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Parque Arauco</td>
+<td>10.3%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">COPEC</td>
+<td>21.4%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias" class="slide level2 smaller scrollable">
+<h2>Referencias</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-bolsadesantiago" class="csl-entry" role="listitem">
+Santiago, Bolsa de. s.&nbsp;f. <span>«Bolsa de Santiago»</span>. <a href="https://www.bolsadesantiago.com/">https://www.bolsadesantiago.com/</a>.
+</div>
+</div>
 <div class="footer footer-default">
 <p>Grupo 13</p>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
