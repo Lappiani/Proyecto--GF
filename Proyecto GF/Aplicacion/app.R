@@ -9,13 +9,14 @@ library(DT)
 
 # Define UI
 ui <- fluidPage(
-  titlePanel("Stock Price App"),
-  h3("Note:"),
-  p("This is a simple Shiny app for plotting stock prices and options strike prices. Please enter a valid stock symbol and click 'Plot'."),
+  titlePanel("Aplicación Grupo 13 Proyecto"),
+  h3("Nota:"),
+  p("Esta aplicación es un dashboard que entrega los principales gráficos que fueron añadidos en el proyecto del ramo. Es importante que el ticker ingresado sea valido."),
+  p("Los ticker en este caso particular eran: [Bolsa de Santiago] CHILE.SN, PARAUCO.SN y COPEC.SN"),
   sidebarLayout(
     sidebarPanel(
-      textInput("symbol", "Enter Stock Symbol:", value = "AAPL"),
-      dateRangeInput("dates", "Date range:", start = Sys.Date() - 30, end = Sys.Date()),
+      textInput("symbol", "Ingrese un ticker:", value = "AAPL"),
+      dateRangeInput("dates", "Rango de fechas:", start = Sys.Date() - 30, end = Sys.Date()),
       actionButton("plot", "Plot")
     ),
     mainPanel(

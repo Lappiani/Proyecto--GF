@@ -116,7 +116,7 @@ con $g(y_i)$ una función arbitraria. Luego, los intervalos de confianza con un 
 Por último, al igual que en la @sec-BS, por motivos de formato no se presenta el código. En cuanto al resultado este se puede observar en la @tbl-Mont.
 
 | Resultado (90% confianza)|
-|--------------------------|
+|:------------------------:|
 |(0,067; 0,138)            |
 : Resultados Monte Carlo {#tbl-Mont}
 
