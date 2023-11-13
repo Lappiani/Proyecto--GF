@@ -40,6 +40,10 @@ Los activos desarrollados en esa ocasión fueron los siguientes.
 
 Donde los tickers corresponden a los de la Bolsa de Santiago [@bolsadesantiago].
 
+::: notes
+Los activos escogidos en esta ocasión que forman parte del IPSA son Banco de Chile, Parque Arauco y COPEC, siendo estos del sector bancario, inmobiliario y energía, respectivamente
+:::
+
 ## Banco de Chile
 
 -   Uno de los bancos comerciales más grandes del país.
@@ -71,6 +75,10 @@ YTD: Year-to-date (son los retornos en el año actual).
 -   Tiene operaciones en Chile, Perú y Colombia.
 -   Cuatro formatos de centros comerciales: regionales, de barrio, *outlets* y *strip centers*.
 
+::: notes
+Parque Arauco es una empresa inmobiliaria chilena, dedicada principalmente a la edificación y administración de centros comerciales. La compañía tiene operaciones en Chile, Perú y Colombia, y cuenta con cuatro formatos de centros comerciales: regionales, de barrio, outlets y stripcenters.
+:::
+
 ## Parque Arauco
 
 -   En Chile, el sector ha estado viviendo un difícil momento. A pesar de esto, Parque Arauco ha anunciado importantes inversiones en Perú y Colombia dentro de este año.
@@ -78,12 +86,19 @@ YTD: Year-to-date (son los retornos en el año actual).
     - [*Parque Arauco acquires a stake in Titán Plaza, one of the most iconic shopping centers in Bogotá, for USD 34 million.*](https://finance.yahoo.com/news/parque-arauco-acquires-stake-tit-124000112.html)
     - [*Parque Arauco Announces USD 33 Million Investment to Expand its Main Asset in Peru*.](https://finance.yahoo.com/news/parque-arauco-announces-usd-33-212600795.html)
 
+::: notes
+Parque Arauco es una compañía importante en el sector, donde si bien este último ha estado pasando por un mal momento en Chile en el último tiempo, no ha sido un impedimento para que la empresa haya hecho importantes inversiones en el extranjero, como señalan estas noticias.
+:::
+
 ## Parque Arauco
 
 -   Actualmente, el precio de la acción es de CLP\$1.190, y viene de una baja en los últimos meses.
 
 ![](Rplot01.png){fig-align="center" width="600" height="400"}
 
+::: notes
+Con respecto a la acción de Parque Arauco, denominada PARAUCO, actualmente tiene un precio de $1190, que viene de una baja de los últimos meses debido principalmente al mal momento del sector.
+:::
 
 ## COPEC
 
@@ -98,6 +113,9 @@ Parque Arauco ha emitido acciones en varias ocasiones dentro de su historia.
 | 933 | Parque Arauco S.A. | UNICA | 25/07/2011 | 94.627.000-8 | 100.000.000 | PESOS |
 ||||||||
 
+::: notes
+Con respecto a las emisiones de un activo, decidimos explicar las de Parque Arauco porque fueron las que más aprendizaje nos dieron. En primer lugar, podemos ver que la compañía ha realizado varias emisiones en su historia.
+:::
 
 ## Emisiones Parque Arauco
 
@@ -105,6 +123,11 @@ Parque Arauco ha emitido acciones en varias ocasiones dentro de su historia.
 - El monto máximo a recaudar era de $78.000.000.000, emitiendo 78.000.000 de acciones.
 - Se pudo ver la declaración de registro, con toda la información financiera y administrativa pertinente.
 - Se pudo ver el contrato de suscripción, explicando cómo se debían suscribir las acciones en distintos plazos.
+
+::: notes
+Pero lo más importante, fue que pudimos analizar la última emisión (del 2016) gracias a su prospecto de emisión.
+Ahí se pudo ver el monto máximo a recaudar, la cantidad de acciones a emitir, la declaración de registro, el contrato de suscripción, etc.
+:::
 
 ## Emisiones Parque Arauco
 
@@ -114,6 +137,10 @@ Parque Arauco ha emitido acciones en varias ocasiones dentro de su historia.
 
 - Para Banco de Chile, debido al poco desarrollo en el país, su acción de la Bolsa de Santiago no posee derivados.
 - Pero su acción de que transa en el *NYSE* si tiene [derivados relacionados](https://es.finance.yahoo.com/quote/BCH/options/?guce_referrer=aHR0cHM6Ly93d3cuYmluZy5jb20v&guce_referrer_sig=AQAAALRsD2Am3yZd8mBpW94mVeqccq_Tqd411u1GuJww65SC58YY0WSXj1-iu9DnvPL5zYRNiNuPo1hw7CjJKxFxL0SNHQ9OhdSgXwm8dn0_lSVAW_tig4Lkt6g2xpY5V3zqE9slTqW3e2jndv5ZiB8hMNLmYPYkA5r0Y8qGEIiFveur&guccounter=2), particularmente opciones.
+
+::: notes
+En general, se pudo ver con un ejemplo concreto el procedimiento de emisión de acciones, la información necesaria, los contratos de suscripción, el procedimiento de colocación, plazos, intermediarios, etc.
+:::
 
 ## Derivados de un activo
 ```{python}
@@ -211,6 +238,22 @@ Resultados del portafolio:
 ------------------------------------------------------------------------
 
 ## Conclusiones {#conclu}
+
+- Importancia de la relación de las variables de contexto con el rendimiento de una empresa y el precio de su acción.
+- Poco desarrollo del mercado de derivados en Chile.
+
+
+::: notes
+En conclusión, este proyecto fue bastante útil para aplicar y comprender los contenidos del curso.
+
+En primer lugar, un descubrimiento importante fue la importancia de la relación de las variables de contexto con el rendimiento de una empresa y el precio de su acción. Esto fue posible de ver el caso de Parque Arauco por ejemplo, donde el movimiento del IPMIC (Índice de Precios de Materiales e Insumos de Construcción), IMACON (Índice Mensual de Actividad de la Construcción) o derechamente las tasas de interés, tenían una relación muy clara con el rendimiento de la empresa y el precio de su acción.
+
+En segundo lugar, tal como se mencionó, buscando por derivados relacionados a la acción del Banco de Chile en la Bolsa de Santiago no se encontró ninguna. Es por esto que se tuvo que hacer uso de la acción de la misma que transa en la Bolsa de Nueva York NYSE, donde existen opciones de compra y de venta del activo subyacente.
+:::
+
+## Aplicación {#app}
+
+Se desarrolló una [aplicación](https://74k0mg-luca-appiani0caro.shinyapps.io/aplicacion/) que entrega el gráfico del precio de la acción con sus volúmenes, y las opciones relacionadas al *ticker* entregado.
 
 ## Referencias
 
