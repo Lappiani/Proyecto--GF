@@ -102,6 +102,84 @@ Con respecto a la acción de Parque Arauco, denominada PARAUCO, actualmente tien
 
 ## COPEC
 
+En el año 2003, COPEC se transforma en la afiliada encargada del negocio de los combustibles líquidos y lubricantes, y la matriz se transforma en un *holding* financiero.
+
+- Negocios:
+    - **Energía:** Combustibles, Electricidad, Gas licuado y natural.
+    - **Recursos Naturales:** Industria forestal, Pesquera y Minera.
+    
+::: notes
+Empresas Copec S.A. es una empresa chilena que opera en dos sectores principales: energía y recursos naturales. En el ámbito de la energía, se dedica a la distribución de combustibles líquidos, generación eléctrica, gas licuado y gas natural. En el sector de recursos naturales, participa en actividades forestales, pesqueras y mineras.
+
+En el negocio de distribución de combustibles líquidos, la empresa gestiona 622 estaciones de servicio, alcanzando una significativa participación de mercado del 64,8%. En cuanto al gas licuado (Abastible), cuenta con una red de 1.485 distribuidores, 46 mil estanques y 5,9 millones de cilindros, logrando una participación del 34,9%. En el segmento de gas natural (Metrogas), la empresa opera una extensa red de ductos de aproximadamente 5.000 km y brinda servicios a alrededor de 440,000 clientes.
+
+Empresas Copec también tiene presencia en la generación de energía, siendo propietaria del 25% de la generadora termoeléctrica Guacolda, que utiliza carbón como fuente de combustible y tiene una capacidad bruta de 304 MW. Además, participa en la minería, involucrándose en la exploración y producción de metales dorados y carbón.
+
+Cabe destacar que Empresas Copec es controlada por el Grupo Angelini, a través de su filial AntarChile S.A.
+
+
+- **Empresas Copec S.A.:** Holding industrial chileno.
+
+- **Negocios:**
+  - **Energía:** Combustibles, electricidad, gas licuado y natural.
+  - **Recursos Naturales:** Industria forestal, pesquera y minera.
+
+- **Distribución de Combustibles:**
+  - 622 estaciones de servicio.
+  - 64,8% de participación.
+
+- **Gas Licuado (Abastible):**
+  - 1.485 distribuidores.
+  - 34,9% de participación.
+
+- **Gas Natural (Metrogas):**
+  - Red de 5.000 km de ductos.
+  - Atiende a 440.000 clientes.
+
+- **Generación Eléctrica:**
+  - 25% en Guacolda (304MW, carbón).
+
+- **Minería:**
+  - Exploración y producción de metal doré y carbón.
+
+- **Control:**
+  - Grupo Angelini a través de AntarChile S.A.
+
+- **Resumen:**
+  - Copec lidera en energía y recursos naturales en Chile, con enfoque estratégico y diversificación clave.
+:::
+
+## COPEC
+
+![](COPEC tabla.png){.absolute right=100}
+
+![](COPEC precio.png){.absolute left=100 width=600}
+
+----
+
+![](Dividend_yield.png){fig-align="center" width=250}
+
+----
+
+## Otro Activos COPEC
+
+![](otros_activos1.png){.absolute fig-align="center" top=100 width="500"}
+![](otros_activos2.png){.absolute fig-align="center" bottom=100 width="500"}
+
+::: notes
+Claro, puedo proporcionar una explicación más fluida de la información proporcionada:
+
+La entidad gestiona activos financieros a valor razonable, que comprenden diversos instrumentos de renta fija, como bonos de empresas, letras hipotecarias, bonos bancarios, depósitos a plazo y otros. Estos activos son administrados por terceros, conocidos como "carteras tercerizadas". El registro de estos activos se realiza al valor razonable, reflejando cualquier cambio de valor directamente en la cuenta de resultados. La razón principal para mantener estos activos es asegurar liquidez y aprovechar oportunidades de rentabilidad.
+
+En cuanto a los fondos mutuos, la entidad los contabiliza al valor de mercado, utilizando el valor cuota al cierre del periodo como referencia. Los fondos mutuos son vehículos de inversión colectiva gestionados por profesionales.
+
+Los swaps se utilizan principalmente como instrumentos de cobertura, especialmente cross currency swaps, que se contratan para mitigar la exposición al riesgo cambiario derivado de deudas denominadas en monedas distintas a las funcionales de la entidad.
+
+En el caso de los forwards, son inicialmente reconocidos a valor razonable en la fecha de su suscripción y se ajustan posteriormente a dicho valor. Estos se registran como activos cuando su valor razonable es positivo, y como pasivos cuando es negativo. El valor razonable de los contratos forward de moneda se calcula haciendo referencia a los tipos de cambio forward actuales de contratos con perfiles de vencimiento similares.
+
+Es relevante destacar que, al 31 de diciembre de 2022 y 2021, la entidad no presenta inversiones mantenidas hasta el vencimiento. Esto puede indicar una estrategia particular en la gestión de inversiones de la entidad.
+:::
+
 ## Emisiones de Parque Arauco {.smaller #carac-deuda}
 
 Parque Arauco ha emitido acciones en varias ocasiones dentro de su historia.
@@ -133,20 +211,24 @@ Ahí se pudo ver el monto máximo a recaudar, la cantidad de acciones a emitir, 
 
 - En general, se pudo ver con un ejemplo concreto el procedimiento de emisión de acciones, la información necesaria, los contratos de suscripción, el procedimiento de colocación, plazos, etc.
 
+::: notes
+En general, se pudo ver con un ejemplo concreto el procedimiento de emisión de acciones, la información necesaria, los contratos de suscripción, el procedimiento de colocación, plazos, intermediarios, etc.
+:::
+
 ## Derivados de un activo {#derivado}
 
 - Para Banco de Chile, debido al poco desarrollo en el país, su acción de la Bolsa de Santiago no posee derivados.
 - Pero su acción de que transa en el *NYSE* si tiene [derivados relacionados](https://es.finance.yahoo.com/quote/BCH/options/?guce_referrer=aHR0cHM6Ly93d3cuYmluZy5jb20v&guce_referrer_sig=AQAAALRsD2Am3yZd8mBpW94mVeqccq_Tqd411u1GuJww65SC58YY0WSXj1-iu9DnvPL5zYRNiNuPo1hw7CjJKxFxL0SNHQ9OhdSgXwm8dn0_lSVAW_tig4Lkt6g2xpY5V3zqE9slTqW3e2jndv5ZiB8hMNLmYPYkA5r0Y8qGEIiFveur&guccounter=2), particularmente opciones.
 
 ::: notes
-En general, se pudo ver con un ejemplo concreto el procedimiento de emisión de acciones, la información necesaria, los contratos de suscripción, el procedimiento de colocación, plazos, intermediarios, etc.
+La acción del Banco de Chile no posee derivados en la bolsa de santiago, lo que revela el poco desarrollo del mercado relacionado en el país. Pero su acción que transa en el mercado de *Nueva York* si posee instrumentos derivados relacionados.
 :::
 
 ## Derivados de un activo
 ```{python}
 #| echo: false
 #| fig-align: center
-#| fig-cap: Evolución del precio del ejercicio de Opciones del BCH.
+#| fig-cap: Evolución del precio del ejercicio de Opciones de **compra** del BCH.
 import yfinance as yf
 import matplotlib.pyplot as plt
 
@@ -158,15 +240,19 @@ options_data = ticker_data.option_chain()
 
 calls = options_data.calls
 
-# Plot the strike price
-plt.plot(calls['strike'], label='Precio del ejercicio', color = 'blue')
+# Scatter plot the strike price vs last price
+plt.scatter(calls['strike'], calls['lastPrice'], label='Último precio', color = 'blue')
 
-plt.xlabel('# Opción')
-plt.ylabel('Precio del ejercicio (USD)')
+plt.xlabel('Precio del ejercicio (USD)')
+plt.ylabel('Último precio (USD)')
 plt.legend()
 plt.show()
 
 ```
+
+::: notes
+En este gráfico se puede observar los precios del ejercicio de opciones relacionadas a la acción del Banco de Chile que transa en el *NYSE*.
+:::
 
 
 ## Modelo alternativo {#alt}
@@ -175,12 +261,20 @@ plt.show()
 - Se utiliza para valuación de opciones "Europeas''.
 - Dentro de los parámetros necesarios para el modelo está el precio actual de la acción en el tiempo $t$, que se denota como $S_{t}$.
 
+::: notes
+El modelo alternativo utiliza un enfoque basado en el método de Monte Carlo, y se utiliza para valuación de opciones Europeas. Algunos de los parametros incluyen el precio actual del activo subyacente, que en este caso era una acción.
+:::
+
 ## Modelo alternativo
 
 - En líneas generales en el proceso ocurre lo siguiente:
     - Se generan valores de $S_{t+m}$, hasta llegar al tiempo $T$.
     - Luego de los experimentos de simulación se calcula el valor esperado de $\max\left\{S_{T}-E,0\right\}$, donde $E$ es el precio del ejercicio de la opción.
     - Este valor es después descontado a una tasa libre de riesgo $t$ para calcular una estimación del valor de la opción $\hat{g}$.
+
+::: notes
+El proceso es el que se detalla en las diapositivas. Un detalle importante es que los modelos de valuación de opciones pueden ser muy complejos, pero este entrega un enfoque relativamente simple en comparación a los demás.
+:::
     
 ## Modelo alternativo
 
@@ -191,7 +285,9 @@ Un detalle importante es que dado que el proceso es una simulación, el resultad
 |:------------------------:|
 |(0,067; 0,138)            |
 
-
+::: notes
+El IC corresponde a una opción de compra de BCH.
+:::
 
 ## Portafolio elegido {#portf}
 
@@ -235,12 +331,20 @@ Resultados del portafolio:
 | Parque Arauco  | 10.3% |
 | COPEC          | 21.4% |
 
+El rendimiento esperado de este portafolio era de un **1,113%**. El rendimiento que se obtuvo fue de **1,332%**.
+
+::: notes
+Resaltar la similitud entre rendimiento esperado y real. El rendimiento real se calculó desde el 8 de agosto hasta el 13 de noviembre.
+:::
+
 ------------------------------------------------------------------------
+
 
 ## Conclusiones {#conclu}
 
 - Importancia de la relación de las variables de contexto con el rendimiento de una empresa y el precio de su acción.
 - Poco desarrollo del mercado de derivados en Chile.
+- La ausencia de inversiones mantenidas hasta el vencimiento al 31 de diciembre de 2022 y 2021 puede reflejar una estrategia de inversión más orientada hacia la liquidez y la adaptación a las condiciones del mercado.
 
 
 ::: notes
@@ -249,11 +353,17 @@ En conclusión, este proyecto fue bastante útil para aplicar y comprender los c
 En primer lugar, un descubrimiento importante fue la importancia de la relación de las variables de contexto con el rendimiento de una empresa y el precio de su acción. Esto fue posible de ver el caso de Parque Arauco por ejemplo, donde el movimiento del IPMIC (Índice de Precios de Materiales e Insumos de Construcción), IMACON (Índice Mensual de Actividad de la Construcción) o derechamente las tasas de interés, tenían una relación muy clara con el rendimiento de la empresa y el precio de su acción.
 
 En segundo lugar, tal como se mencionó, buscando por derivados relacionados a la acción del Banco de Chile en la Bolsa de Santiago no se encontró ninguna. Es por esto que se tuvo que hacer uso de la acción de la misma que transa en la Bolsa de Nueva York NYSE, donde existen opciones de compra y de venta del activo subyacente.
+
+Copec adopta una estrategia financiera prudente, diversificando activos con instrumentos de renta fija gestionados externamente. La contabilización transparente de fondos mutuos y el uso de swaps revelan una gestión proactiva de riesgos, especialmente en deudas en monedas distintas. La cuidadosa gestión de forwards indica atención al riesgo cambiario. La ausencia de inversiones mantenidas hasta el vencimiento sugiere una estrategia enfocada en liquidez y adaptación al mercado, reflejando eficiencia en la gestión de activos.
 :::
 
 ## Aplicación {#app}
 
 Se desarrolló una [aplicación](https://74k0mg-luca-appiani0caro.shinyapps.io/aplicacion/) que entrega el gráfico del precio de la acción con sus volúmenes, y las opciones relacionadas al *ticker* entregado.
+
+::: notes
+La aplicación es un dashboard bastante simple que entrega un gráfico del precio y volúmen, y un gráfico de las opciones cuyo avtivo subyacente es la acción entregada.
+:::
 
 ## Referencias
 
